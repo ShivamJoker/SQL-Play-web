@@ -21,6 +21,7 @@
       "@contexts/*": ["contexts/*"],
       "@types/*": ["types/*"],
       "@components/*": ["components/*"],
+      "@data/*": ["data/*"],
     }
   },
   "include": ["./src"]

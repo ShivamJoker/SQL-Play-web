@@ -1,0 +1,190 @@
+[
+  {
+    "label": "CREATE TABLE",
+    "documentation": "Define a new table\n\n# Syntax: \nCREATE TABLE table_name\n(\ncolumn_name1 data_type,\ncolumn_name2 data_type,\n...\n)"
+  },
+  {
+    "label": "INSERT INTO",
+    "documentation": "Create new rows in a table\n\n# Syntax: \nINSERT INTO table_name\nVALUES (value1, value2, value3,....)\n\nor\n\nINSERT INTO table_name\n(column1, column2, column3,...)\nVALUES (value1, value2, value3,....)"
+  },
+  {
+    "label": "ALTER TABLE",
+    "documentation": "Modifies a table definition\n\n# Syntax: \nALTER TABLE table_name\nADD column_name datatype\n\nor\n\nALTER TABLE table_name\nDROP COLUMN column_name"
+  },
+  {
+    "label": "SELECT",
+    "documentation": "Retrieve rows from a table or view\n\n# Syntax: \nSELECT column_name(s)\nFROM table_name \n\nor SELECT *\nFROM table_name"
+  },
+  {
+    "label": "WHERE",
+    "documentation": "To retrieve specific information from a table excluding other irrelevant data\n\n# Syntax: \nSELECT column_name(s)\nFROM table_name\nWHERE column_name operator value"
+  },
+  {
+    "label": "AND",
+    "documentation": "Select rows that must satisfy all the given conditions\n\n# Syntax: \nSELECT column_name(s)\nFROM table_name\nWHERE condition\nAND condition"
+  },
+  {
+    "label": "OR",
+    "documentation": "Select rows that satisfy atleast one of the given conditions\n\n# Syntax: \nSELECT column_name(s)\nFROM table_name\nWHERE condition\nOR condition"
+  },
+  {
+    "label": "NOT",
+    "documentation": "Select rows that do not satisfy the given condition\n\n# Syntax: \nSELECT column_name(s)\nFROM table_name\nWHERE NOT condition"
+  },
+  {
+    "label": "AS [alias]",
+    "documentation": "To temporarily rename a table or a column heading\n\n# Syntax: \nSELECT column_name AS column_alias\nFROM table_name\n\nor\n\nSELECT column_name\nFROM table_name  AS table_alias"
+  },
+  {
+    "label": "BETWEEN..AND..",
+    "documentation": "To select values within a range\n\n# Syntax: \nSELECT column_name(s)\nFROM table_name\nWHERE column_name\nBETWEEN value1 AND value2"
+  },
+  {
+    "label": "GROUP BY",
+    "documentation": "To collect data across multiple records and group the results by a column\n\n# Syntax: \nSELECT column_name, aggregate_function(column_name)\nFROM table_name\nWHERE column_name operator value\nGROUP BY column_name"
+  },
+  {
+    "label": "HAVING",
+    "documentation": "To filter data based on the group functions\n\n# Syntax: \nSELECT column_name, aggregate_function(column_name)\nFROM table_name\nWHERE column_name operator value\nGROUP BY column_name\nHAVING aggregate_function(column_name) operator value"
+  },
+  {
+    "label": "IN",
+    "documentation": "To test whether a value is in the list of values provided\n\n# Syntax: \nSELECT column_name(s)\nFROM table_name\nWHERE column_name\nIN (value1,value2,..)"
+  },
+  {
+    "label": "LIKE",
+    "documentation": "To search for a specified pattern in a column\n\n# Syntax: \nSELECT column_name(s)\nFROM table_name\nWHERE column_name LIKE pattern"
+  },
+  {
+    "label": "DISTINCT",
+    "documentation": "To return only distinct (different) values in a column\n\n# Syntax: \nSELECT DISTINCT column_name(s)\nFROM table_name"
+  },
+  {
+    "label": "ORDER BY",
+    "documentation": "To sort the records in the result based on a column\n\n# Syntax: \nSELECT column_name(s)\nFROM table_name\nORDER BY column_name [ASC|DESC]"
+  },
+  {
+    "label": "AVG()",
+    "documentation": "Returns the average value of a numeric column\n\n# Syntax: \nSELECT AVG(column_name)\nFROM table_name\nWHERE condition"
+  },
+  {
+    "label": "COUNT()",
+    "documentation": "Returns the number of rows that matches a specified criteria\n\n# Syntax: \nSELECT COUNT(column_name)\nFROM table_name\nWHERE condition"
+  },
+  {
+    "label": "MAX()",
+    "documentation": "Returns the largest value of the selected column\n\n# Syntax: \nSELECT MAX(column_name)\nFROM table_name\nWHERE condition"
+  },
+  {
+    "label": "MIN()",
+    "documentation": "Returns the smallest value of the selected column\n\n# Syntax: \nSELECT MIN(column_name)\nFROM table_name\nWHERE condition"
+  },
+  {
+    "label": "SUM()",
+    "documentation": "Returns the total sum of a numeric column\n\n# Syntax: \nSELECT SUM(column_name)\nFROM table_name\nWHERE condition"
+  },
+  {
+    "label": "CREATE VIEW",
+    "documentation": "Define a new view\n\n# Syntax: \nCREATE VIEW view_name AS\nSELECT column_name(s)\nFROM table_name\nWHERE condition"
+  },
+  {
+    "label": "DROP VIEW",
+    "documentation": "Remove a view\n\n# Syntax: \nDROP VIEW view_name"
+  },
+  {
+    "label": "UPDATE",
+    "documentation": "Update rows of a table\n\n# Syntax: \nUPDATE table_name\nSET column1=value, column2=value,...\nWHERE some_column=some_value"
+  },
+  {
+    "label": "CREATE INDEX",
+    "documentation": "Define a new table\n\n# Syntax: \nCREATE INDEX index_name\nON table_name (column_name)\n\nor\n\nCREATE UNIQUE INDEX index_name\nON table_name (column_name)"
+  },
+  {
+    "label": "DELETE",
+    "documentation": "Delete rows of a table\n\n# Syntax: \nDELETE FROM table_name\nWHERE some_column=some_value\n\nor\n\nDELETE FROM table_name\n(Note: Deletes the entire table!!)\n\nDELETE * FROM table_name\n(Note: Deletes the entire table!!)"
+  },
+  {
+    "label": "UPPER()",
+    "documentation": "Converts a field to upper case\n\n# Syntax: \nUPPER(text)\nor\nUCASE(text)"
+  },
+  {
+    "label": "LOWER()",
+    "documentation": "Converts a field to lower case\n\n# Syntax: \nLOWER(text)\nor\nLCASE(text)"
+  },
+  {
+    "label": "LENGTH()",
+    "documentation": "Returns the length of a text field\n\n# Syntax: \nLENGTH(text)\nor\nLEN(text)"
+  },
+  {
+    "label": "DATE('NOW')",
+    "documentation": "Returns the current system date and time\n\n# Syntax: \nDATE('NOW')"
+  },
+  {
+    "label": "DROP TABLE",
+    "documentation": "Define a new table\n\n# Syntax: \nDROP TABLE table_name"
+  },
+  {
+    "label": "NOT NULL",
+    "documentation": "Enforces a column to not accept NULL values\n\n# Syntax: \nCREATE TABLE table_name\n(\ncolumn_name1 data_type NOT NULL,\ncolumn_name2 data_type NOT NULL,\ncolumn_name3 data_type NOT NULL,\n...\n)"
+  },
+  {
+    "label": "EXISTS",
+    "documentation": "Used in combination with a sub-query and is considered to be met if the sub-query returns at least one row\n\n# Syntax: \nIF EXISTS (SELECT * FROM table_name WHERE id = ?)\nBEGIN\n--do what needs to be done if exists\nEND\nELSE\nBEGIN\n--do what needs to be done if not\nEND"
+  },
+  {
+    "label": "SELECT [columns] INTO",
+    "documentation": "Create a new table from the results of a query\n\n# Syntax: \nSELECT *\nINTO new_table_name [IN externaldatabase]\nFROM old_table_name\n\nor\n\nSELECT column_name(s)\nINTO new_table_name [IN externaldatabase]\nFROM old_table_name"
+  },
+  {
+    "label": "INNER JOIN",
+    "documentation": "Returns all rows from both tables where there is a match\n\n# Syntax: \nSELECT column_name(s)\nFROM table_name\nINNER JOIN other_table ON \nother_table.column_name = table_name.reference_column"
+  },
+  {
+    "label": "LEFT JOIN",
+    "documentation": "Returns all the rows from the first table even if there are no matches in the second table\n\n# Syntax: \nSELECT column_name(s)\nFROM table_name\nLEFT JOIN other_table ON \nother_table.column_name = table_name.reference_column"
+  },
+  {
+    "label": "RIGHT JOIN",
+    "documentation": "Returns all the rows from the second table, even if there are no matches in the first table\n\n# Syntax: \nSELECT column_name(s)\nFROM table_name\nRIGHT JOIN other_table ON \nother_table.column_name = table_name.reference_column"
+  },
+  {
+    "label": "FULL JOIN",
+    "documentation": "Returns all rows from both tables with nulls in place where the join condition is not met\n\n# Syntax: \nSELECT column_name(s)\nFROM table_name\nFull OUTER JOIN other_table ON \nother_table.column_name = table_name.reference_column"
+  },
+  {
+    "label": "UNION",
+    "documentation": "Combines the result of two or more SELECT statements and selects only distinct values\n\n# Syntax: \nSELECT column_name(s) FROM table_name1\nUNION\nSELECT column_name(s) FROM table_name2"
+  },
+  {
+    "label": "UNION ALL",
+    "documentation": "Combines the result of two or more SELECT statements and also select duplicate values\n\n# Syntax: \nSELECT column_name(s) FROM table_name1\nUNION ALL\nSELECT column_name(s) FROM table_name2"
+  },
+  {
+    "label": "UNIQUE",
+    "documentation": "Ensures that each row for a column must have a unique value\n\n# Syntax: \nCREATE TABLE table_name\n(\ncolumn_name1 data_type UNIQUE,\ncolumn_name2 data_type,\ncolumn_name3 data_type,\n...\n)"
+  },
+  {
+    "label": "PRIMARY KEY",
+    "documentation": "Combination of NOT NULL and UNIQUE.It uniquely identifies each record in a database table\n\n# Syntax: \nCREATE TABLE table_name\n(\ncolumn_name1 data_type PRIMARY KEY,\ncolumn_name2 data_type,\ncolumn_name3 data_type,\n...\n)"
+  },
+  {
+    "label": "FOREIGN KEY",
+    "documentation": "Ensure the referential integrity of the data in one table to match values in another table\n\n# Syntax: \nCREATE TABLE table_name\n(\ncolumn_name1 data_type PRIMARY KEY,\n FOREIGN KEY(column_name2) \nREFERENCES OtherTable(otherTableColumnID), \ncolumn_name3 data_type,\n...\n)"
+  },
+  {
+    "label": "DEFAULT",
+    "documentation": "Specifies a default value for a column\n\n# Syntax: \nCREATE TABLE table_name\n(\ncolumn_name1 data_type DEFAULT defaultValue,\ncolumn_name2 data_type,\ncolumn_name3 data_type,\n...\n)"
+  },
+  {
+    "label": "MID()",
+    "documentation": "Extract characters from a text field\n\n# Syntax: \nMID(text)"
+  },
+  {
+    "label": "ROUND()",
+    "documentation": "Rounds a numeric field to the number of decimals specified\n\n# Syntax: \nROUND(integer)"
+  },
+  {
+    "label": "FORMAT()",
+    "documentation": "Formats how a field is to be displayed\n\n# Syntax: \nFORMAT(value, format, culture)"
+  }
+]
