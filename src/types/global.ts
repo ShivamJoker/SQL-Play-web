@@ -11,7 +11,7 @@ export type GlobalReducerActions =
       theme: IGlobalState['theme'];
     }
   | {
-      type: 'swtich_sidebar_tab';
+      type: 'switch_sidebar_tab';
       tab: IGlobalState['activeSidebarTab'];
     }
   | {
