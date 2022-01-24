@@ -1,5 +1,5 @@
 import React, { createContext, Dispatch, ReactNode, useReducer } from 'react';
-import { GlobalReducerActions, IGlobalState } from '../types/global';
+import { GlobalReducerActions, IGlobalState } from '~types/global';
 
 const initialState: IGlobalState = {
   activeSidebarTab: 'search',

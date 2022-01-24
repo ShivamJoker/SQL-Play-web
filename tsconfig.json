@@ -19,7 +19,7 @@
     "paths": {
       "@styles/*": ["styles/*"],
       "@contexts/*": ["contexts/*"],
-      "@types/*": ["types/*"],
+      "~types/*": ["types/*"],
       "@components/*": ["components/*"],
       "@data/*": ["data/*"],
     }

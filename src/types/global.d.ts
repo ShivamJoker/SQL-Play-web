@@ -1,5 +1,5 @@
 export interface IGlobalState {
-  activeSidebarTab: 'search' | 'settings';
+  activeSidebarTab: 'search' | 'settings' | 'premium';
   theme: 'dark' | 'default' | 'system';
   sidebarCollapsed: boolean;
   sidebarPosition: 'left' | 'right';

@@ -1,19 +1,50 @@
 import {AiFillCrown, AiOutlineSearch, AiOutlineSetting} from 'react-icons/ai';
-import "@styles/SideNav/index.scss";
+import { useContext } from 'react';
+import {AppContext} from '@contexts/AppContext';
+import type { IGlobalState } from '~types/global';
+import Button from './button';
+import SubNavButton from '~types/SubNavButtons';
 
 function SideNav() {
+
+  const {state: {activeSidebarTab}, dispatch} = useContext(AppContext);
+
+  const setActiveTab = (tabName: IGlobalState['activeSidebarTab']) => {
+    dispatch({tab: tabName, type: 'switch_sidebar_tab'})
+  };
+
+  const buttons: SubNavButton[] = [
+    {
+      title: 'search',
+      icon: AiOutlineSearch
+    },
+    {
+      title: 'settings',
+      icon: AiOutlineSetting,
+    },
+    {
+      title:'premium',
+      icon: AiFillCrown
+    }
+  ]
+
+  const buttonPress = (btnKey: IGlobalState['activeSidebarTab']) => {
+    setActiveTab(btnKey);
+
+    // code for events like changing workspace's screen will be here.
+  }
+
   return (
     <>
       <div className="side_nav">
-        <button className='side_nav__nav_btns'>
-          <AiOutlineSearch size={30} color='white'/>
-        </button>
-        <button className='side_nav__nav_btns'>
-          <AiOutlineSetting size={30} color='white'/>
-        </button>
-        <button className='side_nav__nav_btns'>
-          <AiFillCrown size={30} color='white'/>
-        </button>
+        {buttons.map((btn, index) => (
+          <Button
+            Icon={btn.icon}
+            active={btn.title === activeSidebarTab}
+            key={`sub-nav-btn-${index*2}`}
+            onClick={() => buttonPress(btn.title)}
+          />
+        ))}
       </div>
     </>
   );

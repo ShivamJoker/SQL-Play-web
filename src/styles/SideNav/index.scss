@@ -16,6 +16,9 @@
     display: flex;
     justify-content: center;
     padding: 10px 0px;
+    &.btn-active {
+      background: #a57c00;
+    }
     &:hover {
       background: #a57c00;
     }
