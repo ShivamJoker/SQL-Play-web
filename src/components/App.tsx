@@ -4,26 +4,25 @@ import SideNav from './SideNav';
 import Workspace from './Workspace';
 import '@styles/app.scss';
 import Split from 'react-split';
-import SQLPlayground from './SQLPlayground';
+import SQLEditor from './Editor';
 
 function App() {
-  
   const { state, dispatch } = useContext(AppContext);
 
   return (
-    <div className='app'>
+    <div className="app">
       <SideNav />
       <Split
-      sizes={[30, 70]}
-      maxSize={[400, Infinity]}
-      minSize={[200, 0]}
-      expandToMin={false}
-      gutterSize={10}
-      gutterAlign="center"
-      direction="horizontal"
-      className='split-container'>
-      <Workspace />
-      <SQLPlayground />
+        sizes={[25, 75]}
+        maxSize={[600, Infinity]}
+        minSize={[400, 0]}
+        gutterSize={10}
+        gutterAlign="center"
+        direction="horizontal"
+        className="split-container"
+      >
+        <Workspace />
+        <SQLEditor />
       </Split>
     </div>
   );

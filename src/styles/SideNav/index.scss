@@ -1,6 +1,6 @@
 .side_nav {
   width: 50px;
-  background: #FCD45B;
+  background: #fdd835;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -11,13 +11,13 @@
     border: none;
     outline: none;
     cursor: pointer;
-    width: 100%;
     height: 50px;
+    width: 50px;
     display: flex;
     justify-content: center;
-    padding: 10px 0px;
+    align-items: center;
     &.btn-active {
-      background: #a57c00;
+      border-left: 4px solid #212121;
     }
     &:hover {
       background: #a57c00;
