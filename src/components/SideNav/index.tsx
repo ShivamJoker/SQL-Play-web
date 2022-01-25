@@ -1,5 +1,4 @@
 import {
-  AiFillCrown,
   AiOutlineCrown,
   AiOutlineSearch,
   AiOutlineSetting,

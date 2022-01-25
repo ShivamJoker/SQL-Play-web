@@ -18,7 +18,7 @@ const SQLEditor = () => {
           label: item.label,
           documentation: item.documentation,
           //should be syntax here
-          insertText: item.label,
+          insertText: item.insertText,
           range: range,
           kind: monaco.languages.CompletionItemKind.Function,
           insertTextRules:
