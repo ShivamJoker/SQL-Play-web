@@ -22,6 +22,7 @@
       "~types/*": ["types/*"],
       "@components/*": ["components/*"],
       "@data/*": ["data/*"],
+      "@utils/*": ["utils/*"],
     }
   },
   "include": ["./src"]

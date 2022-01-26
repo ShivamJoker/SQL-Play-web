@@ -1,49 +1,61 @@
 import Editor, { OnMount, useMonaco } from '@monaco-editor/react';
 import '@styles/SQLPlayground/index.scss';
-import sqlData from '@data/sql.json';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { IRange, languages } from 'monaco-editor';
+import getSQLData from '@utils/getSQLData';
+import SQLData from '~types/sqlData';
 
 const SQLEditor = () => {
   const monaco = useMonaco();
+  const [SQLData, setSQLData] = useState<SQLData[] | undefined>();
+  
+  useEffect(() => {
+    getSQLData().then((data) => setSQLData(data))
+  }, []);
 
   useEffect(() => {
     if (!monaco?.languages) return;
 
     const createDependencyProposals = (
+      
       range: IRange
+
     ): languages.CompletionItem[] => {
-      return sqlData.map((item) => {
-        return {
-          label: item.label,
-          documentation: item.documentation,
-          //should be syntax here
-          insertText: item.insertText,
-          range: range,
-          kind: monaco.languages.CompletionItemKind.Function,
-          insertTextRules:
-            monaco?.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-        };
-      });
+        if(SQLData){
+          return SQLData.map((item) => {
+           return {
+             label: item.label,
+             documentation: item.documentation,
+             insertText: item.insertText,
+             range: range,
+             kind: monaco.languages.CompletionItemKind.Function,
+             insertTextRules:
+               monaco?.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+           };
+         });
+        }
+        return []
     };
+    if(SQLData){
+      monaco.languages.registerCompletionItemProvider('sql', {
+        provideCompletionItems: (model, position) => {
+          const word = model.getWordUntilPosition(position);
+  
+          const range: IRange = {
+            startLineNumber: position.lineNumber,
+            endLineNumber: position.lineNumber,
+            startColumn: word.startColumn,
+            endColumn: word.endColumn,
+          };
+  
+          return {
+            suggestions: createDependencyProposals(range),
+          };
+        },
+      });
 
-    monaco?.languages.registerCompletionItemProvider('sql', {
-      provideCompletionItems: (model, position) => {
-        const word = model.getWordUntilPosition(position);
-
-        const range: IRange = {
-          startLineNumber: position.lineNumber,
-          endLineNumber: position.lineNumber,
-          startColumn: word.startColumn,
-          endColumn: word.endColumn,
-        };
-
-        return {
-          suggestions: createDependencyProposals(range),
-        };
-      },
-    });
-  }, [monaco]);
+    }
+  }, [monaco, SQLData]);
 
   const onMount: OnMount = (editor) => {
     editor.onKeyDown((event) => {
