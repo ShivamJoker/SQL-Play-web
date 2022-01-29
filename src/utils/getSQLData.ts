@@ -1,32 +1,29 @@
 import {get, set} from 'idb-keyval';
-import SQLData, { FetchSQLData } from '~types/sqlData';
+import sqlSyntaxes, { FetchSQLData } from '~types/sqlSyntaxes';
 
 
-const getSQLData = async (): Promise<SQLData[]> => {
+const getSQLData = async (): Promise<sqlSyntaxes[]> => {
   
   try {
     
     const dbData = await get('commands');
     
     if(dbData){
-      console.log('using saved database...');
       return dbData;
     }
-    const response = await fetch('https://raw.githubusercontent.com/ShivamJoker/SQL-Play/master/src/data/commands.json');
+    const response = await fetch(import.meta.env.VITE_APP_SQL_SYNTAX_FILE_URL);
   
     const commands = await response.json();
 
-    let data = commands.map((cmd: FetchSQLData) => {
-      const item: SQLData = {
+    const data = commands.map((cmd: FetchSQLData) => {
+      const item: sqlSyntaxes = {
         label: cmd.title,
-        documentation: `${cmd.description}\n\n# Syntax:\n${cmd.syntax}\n\n${cmd.example ? `# Example:\n${cmd.example}` : ''}`,
-        insertText: cmd.syntax
+        documentation: `${cmd.description}\n\n# Syntax:\n${Array.isArray(cmd.syntax) ? cmd.syntax.join('\n') : cmd.syntax}\n\n${cmd.example ? `# Example:\n${cmd.example}` : ''}`,
+        insertText: Array.isArray(cmd.syntax) ? cmd.syntax.join('\n') : cmd.syntax
       }
       return item;
     })
-    set('commands', data).then(() => {
-      console.log('saved new sql database, loaded from fetch.');
-    });
+    await set('commands', data);
 
     return data;
   } catch (error) {

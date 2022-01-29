@@ -3,11 +3,11 @@ import '@styles/SQLPlayground/index.scss';
 import { useEffect, useState } from 'react';
 import { IRange, languages } from 'monaco-editor';
 import getSQLData from '@utils/getSQLData';
-import SQLData from '~types/sqlData';
+import sqlSyntaxes from '~types/sqlSyntaxes';
 
 const SQLEditor = () => {
   const monaco = useMonaco();
-  const [SQLData, setSQLData] = useState<SQLData[] | undefined>();
+  const [sqlSyntaxes, setSQLData] = useState<sqlSyntaxes[] | undefined>();
   
   useEffect(() => {
     getSQLData().then((data) => setSQLData(data))
@@ -21,8 +21,8 @@ const SQLEditor = () => {
       range: IRange
 
     ): languages.CompletionItem[] => {
-        if(SQLData){
-          return SQLData.map((item) => {
+        if(sqlSyntaxes){
+          return sqlSyntaxes.map((item) => {
            return {
              label: item.label,
              documentation: item.documentation,
@@ -36,7 +36,7 @@ const SQLEditor = () => {
         }
         return []
     };
-    if(SQLData){
+    if(sqlSyntaxes){
       monaco.languages.registerCompletionItemProvider('sql', {
         provideCompletionItems: (model, position) => {
           const word = model.getWordUntilPosition(position);
@@ -55,7 +55,7 @@ const SQLEditor = () => {
       });
 
     }
-  }, [monaco, SQLData]);
+  }, [monaco, sqlSyntaxes]);
 
   const onMount: OnMount = (editor) => {
     editor.onKeyDown((event) => {
