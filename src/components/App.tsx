@@ -1,19 +1,29 @@
-import { useContext, useEffect, useReducer, useState } from 'react';
-import { AppContext } from '../contexts/AppContext';
+import { useContext } from 'react';
+import { AppContext } from '@contexts/AppContext';
+import SideNav from './SideNav';
+import Workspace from './Workspace';
+import '@styles/app.scss';
+import Split from 'react-split';
+import SQLEditor from './Editor';
 
 function App() {
   const { state, dispatch } = useContext(AppContext);
+
   return (
-    <div className="App">
-      <h1>Theme is {state.theme}</h1>
-      <button
-        onClick={() => {
-          dispatch({ type: 'switch_theme', theme: 'dark' });
-        }}
-        type="button"
+    <div className="app">
+      <SideNav />
+      <Split
+        sizes={[25, 75]}
+        maxSize={[600, Infinity]}
+        minSize={[400, 0]}
+        gutterSize={10}
+        gutterAlign="center"
+        direction="horizontal"
+        className="split-container"
       >
-        Switch to dark theme
-      </button>
+        <Workspace />
+        <SQLEditor />
+      </Split>
     </div>
   );
 }

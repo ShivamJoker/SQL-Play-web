@@ -1,5 +1,5 @@
 import React, { createContext, Dispatch, ReactNode, useReducer } from 'react';
-import { GlobalReducerActions, IGlobalState } from '../types/global';
+import { GlobalReducerActions, IGlobalState } from '~types/global';
 
 const initialState: IGlobalState = {
   activeSidebarTab: 'search',
@@ -8,13 +8,12 @@ const initialState: IGlobalState = {
   theme: 'system',
 };
 
-const reducer = (
-  state: IGlobalState,
-  action: GlobalReducerActions
-): IGlobalState => {
+const reducer = (state: IGlobalState, action: GlobalReducerActions ): IGlobalState => {
+
   // declare all the cases here
+  
   switch (action.type) {
-    case 'swtich_sidebar_tab': {
+    case 'switch_sidebar_tab': {
       return { ...state, activeSidebarTab: action.tab };
     }
     case 'switch_theme': {
