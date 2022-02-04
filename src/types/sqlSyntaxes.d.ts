@@ -1,7 +1,8 @@
-interface sqlSyntaxes {
+interface sqlSyntaxes extends FetchSQLData {
   label: string,
   documentation: string,
   insertText: string,
+
 }
 
 export interface FetchSQLData {

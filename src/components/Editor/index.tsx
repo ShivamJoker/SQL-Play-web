@@ -1,13 +1,13 @@
 import Editor, { OnChange, OnMount, useMonaco } from '@monaco-editor/react';
 import '@styles/Editor/index.scss';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { editor, IRange, languages } from 'monaco-editor';
 import getSQLData from '@utils/getSQLData';
 import sqlSyntaxes from '~types/sqlSyntaxes';
 import ControlBox from './ControlBox';
 import { QueryExecResult } from 'sql.js';
-import {nanoid} from 'nanoid';
 import ResultsTable from './ResultsTable';
+import { AppContext } from '@contexts/AppContext';
 
 const SQLEditor = () => {
   const monaco = useMonaco();
@@ -15,10 +15,18 @@ const SQLEditor = () => {
   const [monacoEditor, setMonacoEditor] = useState<editor.IStandaloneCodeEditor>();
   const [editorText, setEditorText] = useState<string>();
   const [sqlResults, setSQLResults] = useState<QueryExecResult[]>();
+  const {state: {editorText: newEditorText}} = useContext(AppContext);
 
   useEffect(() => {
     getSQLData().then((data) => setSQLData(data))
   }, []);
+
+
+  useEffect(() => {
+    if(newEditorText.length && monacoEditor) {
+      monacoEditor.setValue(newEditorText);
+    }
+  }, [newEditorText, monacoEditor])
 
   useEffect(() => {
     if (!monaco?.languages) return;

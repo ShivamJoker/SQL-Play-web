@@ -9,7 +9,7 @@ import type { IGlobalState } from '~types/global';
 import Button from './NavButton';
 import SubNavButton from '~types/SubNavButtons';
 
-function SideNav() {
+const SideNav = () => {
   const {
     state: { activeSidebarTab },
     dispatch,

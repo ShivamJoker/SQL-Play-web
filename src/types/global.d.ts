@@ -3,6 +3,7 @@ export interface IGlobalState {
   theme: 'dark' | 'default' | 'system';
   sidebarCollapsed: boolean;
   sidebarPosition: 'left' | 'right';
+  editorText: string
 }
 
 export type GlobalReducerActions =
@@ -17,4 +18,8 @@ export type GlobalReducerActions =
   | {
       type: 'collapse_sidebar';
     }
-  | { type: 'expand_sidebar' };
+  | { type: 'expand_sidebar' } |
+  {
+    type: 'update_editor_text';
+    text: IGlobalState['editorText'];
+  };

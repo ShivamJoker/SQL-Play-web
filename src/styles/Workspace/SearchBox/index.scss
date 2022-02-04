@@ -1,0 +1,96 @@
+.searchbox__container {
+  padding: 20px;
+  &__results {
+    height: calc(100vh - 75px);
+    overflow: auto;
+    margin-top: 15px;
+    &::-webkit-scrollbar {
+      width: 0px;
+    }
+  }
+  &__input_box {
+    position: relative;
+    &__input {
+      width: 100%;
+      height: 40px;
+      border-radius: 10px;
+      border: none;
+      padding: 5px 10px;
+      outline: none;
+      font-size: 18px;
+      &::placeholder {
+        color: black;
+      }
+      &::-webkit-search-cancel-button,
+      &::-webkit-search-decoration,
+      &::-webkit-search-results-button,
+      &::-webkit-search-results-decoration {
+        display: none;
+      }
+    }
+    .search_icon {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      outline: none;
+      border: none;
+      cursor: pointer;
+    }
+  }
+  .result_box {
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    .title_and_description {
+      position: relative;
+    }
+    &:active {
+      background: #eee;
+    }
+    .list_description {
+      width: 80%;
+      margin-top: 10px;
+    }
+    .arrow-up-down-box {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 20%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.accordian_container {
+  margin: 10px 0px;
+}
+pre, code {
+  white-space: pre;
+  overflow: auto;
+  &::-webkit-scrollbar{
+    width: 0px;
+  }
+}
+.syntax-box {
+  margin: 10px 0px;
+}
+.hljs {
+  padding: 0.5em;
+}
+.hidden_section{
+  width: 90%;
+}
+.example_highlighted{
+  background: #eee !important;
+  margin: 10px 0px;
+}
