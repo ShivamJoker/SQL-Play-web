@@ -1,17 +1,32 @@
-import Editor, { OnMount, useMonaco } from '@monaco-editor/react';
-import '@styles/SQLPlayground/index.scss';
-import { useEffect, useState } from 'react';
-import { IRange, languages } from 'monaco-editor';
+import Editor, { OnChange, OnMount, useMonaco } from '@monaco-editor/react';
+import '@styles/Editor/index.scss';
+import { useContext, useEffect, useState } from 'react';
+import { editor, IRange, languages } from 'monaco-editor';
 import getSQLData from '@utils/getSQLData';
 import sqlSyntaxes from '~types/sqlSyntaxes';
+import ControlBox from './ControlBox';
+import { QueryExecResult } from 'sql.js';
+import ResultsTable from './ResultsTable';
+import { AppContext } from '@contexts/AppContext';
 
 const SQLEditor = () => {
   const monaco = useMonaco();
   const [sqlSyntaxes, setSQLData] = useState<sqlSyntaxes[] | undefined>();
-  
+  const [monacoEditor, setMonacoEditor] = useState<editor.IStandaloneCodeEditor>();
+  const [editorText, setEditorText] = useState<string>();
+  const [sqlResults, setSQLResults] = useState<QueryExecResult[]>();
+  const {state: {editorText: newEditorText}} = useContext(AppContext);
+
   useEffect(() => {
     getSQLData().then((data) => setSQLData(data))
   }, []);
+
+
+  useEffect(() => {
+    if(newEditorText.length && monacoEditor) {
+      monacoEditor.setValue(newEditorText);
+    }
+  }, [newEditorText, monacoEditor])
 
   useEffect(() => {
     if (!monaco?.languages) return;
@@ -57,24 +72,57 @@ const SQLEditor = () => {
     }
   }, [monaco, sqlSyntaxes]);
 
-  const onMount: OnMount = (editor) => {
-    editor.onKeyDown((event) => {
-      if (event.code === 'Enter' && (event.metaKey || event.ctrlKey)) {
-        console.log('Ctrl + Enter');
-        event.preventDefault();
-      }
-    });
-  };
+  useEffect(() => {
+    if(monaco?.languages && monacoEditor){
+      monacoEditor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
+        const runSQLButton = document.querySelector<HTMLButtonElement>('button#run-sql-button');
+
+        runSQLButton?.classList.add('focusing');
+        runSQLButton?.click();
+
+        setTimeout(() => runSQLButton?.classList.remove('focusing'), 50);
+        
+        monacoEditor.focus();
+
+      });
+    }
+  }, [monaco, monacoEditor])
+
+
+  // functions
+
+  const onMount: OnMount = (editor) => setMonacoEditor(editor);
+  const editorOnChange: OnChange = (text) => setEditorText(text?.trim());
 
   return (
-    <div className="sql_playground">
-      <div className="sql_textarea">
-        <Editor
-          height="200px"
-          language="sql"
-          onMount={onMount}
-          width={'100%'}
-        />
+    <div> {/* empty div for react-split.js */}
+      <div className="sql_playground">
+        <div className="sql_codearea">
+          <div className="sql_codearea__textarea">
+            <Editor
+              height="200px"
+              language="sql"
+              onMount={onMount}
+              options={{
+                minimap: {enabled: false},
+                overviewRulerLanes: 0,
+                scrollbar: {
+                  vertical: 'auto',
+                  horizontal: 'auto',
+                  verticalScrollbarSize: 0,
+                },
+                autoIndent: 'full',
+              }}
+              onChange={editorOnChange}
+            />
+          </div>
+        <ControlBox editorText={editorText ? editorText : ''} onResult={setSQLResults} />
+        </div>
+        <div className="sql_result_container">
+          {sqlResults?.map((table) => (
+            <ResultsTable table={table} />  
+          ))}
+        </div>
       </div>
     </div>
   );

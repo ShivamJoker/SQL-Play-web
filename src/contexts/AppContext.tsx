@@ -6,6 +6,7 @@ const initialState: IGlobalState = {
   sidebarCollapsed: false,
   sidebarPosition: 'left',
   theme: 'system',
+  editorText: ''
 };
 
 const reducer = (state: IGlobalState, action: GlobalReducerActions ): IGlobalState => {
@@ -18,6 +19,9 @@ const reducer = (state: IGlobalState, action: GlobalReducerActions ): IGlobalSta
     }
     case 'switch_theme': {
       return { ...state, theme: action.theme };
+    }
+    case 'update_editor_text': {
+      return { ...state, editorText: action.text };
     }
     default:
       return state;
