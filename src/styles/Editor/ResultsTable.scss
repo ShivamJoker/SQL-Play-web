@@ -5,6 +5,11 @@ table {
     background: rgb(255, 217, 0);
   }
   th, td {
+    white-space: nowrap;
+    word-wrap: break-word;
+    overflow: hidden !important;
+    max-width: 160px;
+    text-overflow: ellipsis;
     padding: 10px;
     border: 2px solid rgb(255, 255, 0);
   }

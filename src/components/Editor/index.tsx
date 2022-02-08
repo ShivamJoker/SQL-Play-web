@@ -1,4 +1,4 @@
-import Editor, { OnChange, OnMount, useMonaco } from '@monaco-editor/react';
+import Editor, { OnChange, OnMount, useMonaco, loader } from '@monaco-editor/react';
 import '@styles/Editor/index.scss';
 import { useContext, useEffect, useState } from 'react';
 import { editor, IRange, languages } from 'monaco-editor';
@@ -8,6 +8,12 @@ import ControlBox from './ControlBox';
 import { QueryExecResult } from 'sql.js';
 import ResultsTable from './ResultsTable';
 import { AppContext } from '@contexts/AppContext';
+
+loader.config({
+  paths: {
+    vs: '/node_modules/monaco-editor/min/vs'
+  }
+})
 
 const SQLEditor = () => {
   const monaco = useMonaco();
@@ -111,7 +117,13 @@ const SQLEditor = () => {
                   horizontal: 'auto',
                   verticalScrollbarSize: 0,
                 },
+                lineNumbers: 'off',
+                glyphMargin: false,
+                folding: false,
+                lineDecorationsWidth: 0,
+                lineNumbersMinChars: 0,
                 autoIndent: 'full',
+                renderLineHighlight: 'none',
               }}
               onChange={editorOnChange}
             />

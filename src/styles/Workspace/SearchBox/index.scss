@@ -88,7 +88,10 @@ pre, code {
   padding: 0.5em;
 }
 .hidden_section{
-  width: 90%;
+  width: 100%;
+}
+.syntax_highlighted {
+  background: transparent !important;
 }
 .example_highlighted{
   background: #eee !important;
