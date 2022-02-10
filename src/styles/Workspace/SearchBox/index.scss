@@ -17,9 +17,11 @@
       border: none;
       padding: 5px 10px;
       outline: none;
+      background: var(--bg);
+      color: var(--bg-reverse);
       font-size: 18px;
       &::placeholder {
-        color: black;
+        color: var(--bg-reverse);
       }
       &::-webkit-search-cancel-button,
       &::-webkit-search-decoration,
@@ -41,18 +43,22 @@
       outline: none;
       border: none;
       cursor: pointer;
+      svg{
+        color: var(--bg-reverse);
+      }
     }
   }
   .result_box {
-    background: #fff;
+    background: var(--bg);
     padding: 10px;
     border-radius: 10px;
+    color: var(--bg-reverse);
     cursor: pointer;
     .title_and_description {
       position: relative;
     }
     &:active {
-      background: #eee;
+      background: var(--off-background);
     }
     .list_description {
       width: 80%;
@@ -94,6 +100,6 @@ pre, code {
   background: transparent !important;
 }
 .example_highlighted{
-  background: #eee !important;
+  background: var(--off-background) !important;
   margin: 10px 0px;
 }

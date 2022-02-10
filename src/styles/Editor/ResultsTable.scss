@@ -1,8 +1,12 @@
 table {
   border: 2px solid rgb(255, 255, 0);
   border-collapse: collapse;
-  thead tr {
+  width: 100%;
+  tr.headers {
     background: rgb(255, 217, 0);
+    th{
+      color: #000;
+    }
   }
   th, td {
     white-space: nowrap;
@@ -12,5 +16,8 @@ table {
     text-overflow: ellipsis;
     padding: 10px;
     border: 2px solid rgb(255, 255, 0);
+  }
+  td{
+    color: var(--bg-reverse);
   }
 }

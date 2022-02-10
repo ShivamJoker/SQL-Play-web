@@ -18,7 +18,7 @@ code {
 }
 
 .gutter {
-  background-color: #eee;
+  background-color: var(--off-background);
   cursor: ew-resize;
   background-repeat: no-repeat;
   background-position: 50%;

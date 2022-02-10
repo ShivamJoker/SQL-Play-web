@@ -21,7 +21,7 @@ const SQLEditor = () => {
   const [monacoEditor, setMonacoEditor] = useState<editor.IStandaloneCodeEditor>();
   const [editorText, setEditorText] = useState<string>();
   const [sqlResults, setSQLResults] = useState<QueryExecResult[]>();
-  const {state: {editorText: newEditorText}} = useContext(AppContext);
+  const {state: {editorText: newEditorText, theme}} = useContext(AppContext);
 
   useEffect(() => {
     getSQLData().then((data) => setSQLData(data))
@@ -108,6 +108,7 @@ const SQLEditor = () => {
             <Editor
               height="200px"
               language="sql"
+              theme={`${theme === "dark" ? "vs-dark" : 'vs-light'}`}
               onMount={onMount}
               options={{
                 minimap: {enabled: false},

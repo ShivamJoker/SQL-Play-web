@@ -1,6 +1,7 @@
 .workspace_container {
-  background: #F2F2F2;
+  background: var(--bg-alt);
   height: 100vh;
+  width: 25vw;
 }
 .split-container{
   display: flex;
