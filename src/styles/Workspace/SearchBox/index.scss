@@ -1,5 +1,6 @@
 .searchbox__container {
   padding: 20px;
+  margin-right: -10px;
   &__results {
     height: calc(100vh - 75px);
     overflow: auto;
@@ -68,7 +69,7 @@
       position: absolute;
       top: 0px;
       right: 0px;
-      width: 20%;
+      width: 10%;
       height: 100%;
       display: flex;
       justify-content: center;

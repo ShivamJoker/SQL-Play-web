@@ -131,11 +131,11 @@ const SQLEditor = () => {
           </div>
         <ControlBox editorText={editorText ? editorText : ''} onResult={setSQLResults} />
         </div>
-        <div className="sql_result_container">
-          {sqlResults?.map((table) => (
-            <ResultsTable table={table} />  
-          ))}
-        </div>
+          <div className="sql_result_container">
+            {sqlResults?.map((table) => (
+              <ResultsTable table={table} />  
+            ))}
+          </div>
       </div>
     </div>
   );

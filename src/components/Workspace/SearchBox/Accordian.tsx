@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { IoCaretUpOutline, IoCaretDownOutline } from "react-icons/io5";
+import { IoChevronUpOutline, IoChevronDownOutline } from "react-icons/io5";
 import {Props} from '~types/components/SearchBox/Accordian';
 import {PrismAsyncLight as SyntaxHighlighter} from 'react-syntax-highlighter';
 
@@ -32,7 +32,7 @@ const Accordian : React.FC<Props> = ({i, expanded, setExpanded, item, changeText
             <motion.h4 className="list_heading">{item.label}</motion.h4>
             <motion.p className="list_description">{item.description}</motion.p>
             <motion.div className="arrow-up-down-box">
-              {!isOpen ? <IoCaretUpOutline /> : <IoCaretDownOutline />}
+              {!isOpen ? <IoChevronUpOutline /> : <IoChevronDownOutline />}
             </motion.div>
           </motion.div>
           <AnimatePresence initial={true}>

@@ -52,7 +52,7 @@ function App() {
     <div className={`app ${state.theme}`}>
       <SideNav />
       <Split
-        sizes={[25, 75]}
+        sizes={[20, 80]}
         maxSize={[600, Infinity]}
         minSize={[400, 0]}
         gutterSize={10}
