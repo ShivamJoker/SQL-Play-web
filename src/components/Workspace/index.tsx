@@ -13,7 +13,7 @@ const Workspace = () => {
         <div className="wrapper">
           {activeSidebarTab === "search" ? <SearchBox /> : null}
           {activeSidebarTab === "settings" ? <Settings /> : null}
-          {activeSidebarTab === "premium" ? <Premium /> : null}
+          {/* {activeSidebarTab === "premium" ? <Premium /> : null} */}
         </div>
       </div>
     </>
