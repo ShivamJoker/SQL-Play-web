@@ -1,7 +1,7 @@
-import Editor, { OnChange, OnMount, useMonaco, loader } from '@monaco-editor/react';
+import Editor, { OnChange, OnMount, useMonaco } from '@monaco-editor/react';
 import '@styles/Editor/index.scss';
 import { useContext, useEffect, useState } from 'react';
-import { editor, IRange, languages } from 'monaco-editor';
+import * as monacoModule from 'monaco-editor';
 import getSQLData from '@utils/getSQLData';
 import sqlSyntaxes from '~types/sqlSyntaxes';
 import ControlBox from './ControlBox';
@@ -9,16 +9,10 @@ import { QueryExecResult } from 'sql.js';
 import ResultsTable from './ResultsTable';
 import { AppContext } from '@contexts/AppContext';
 
-loader.config({
-  paths: {
-    vs: '/node_modules/monaco-editor/min/vs'
-  }
-})
-
 const SQLEditor = () => {
   const monaco = useMonaco();
   const [sqlSyntaxes, setSQLData] = useState<sqlSyntaxes[] | undefined>();
-  const [monacoEditor, setMonacoEditor] = useState<editor.IStandaloneCodeEditor>();
+  const [monacoEditor, setMonacoEditor] = useState<monacoModule.editor.IStandaloneCodeEditor>();
   const [editorText, setEditorText] = useState<string>();
   const [sqlResults, setSQLResults] = useState<QueryExecResult[]>();
   const {state: {editorText: newEditorText, theme}} = useContext(AppContext);
@@ -39,9 +33,9 @@ const SQLEditor = () => {
 
     const createDependencyProposals = (
       
-      range: IRange
+      range: monacoModule.IRange
 
-    ): languages.CompletionItem[] => {
+    ): monacoModule.languages.CompletionItem[] => {
         if(sqlSyntaxes){
           return sqlSyntaxes.map((item) => {
            return {
@@ -62,7 +56,7 @@ const SQLEditor = () => {
         provideCompletionItems: (model, position) => {
           const word = model.getWordUntilPosition(position);
   
-          const range: IRange = {
+          const range: monacoModule.IRange = {
             startLineNumber: position.lineNumber,
             endLineNumber: position.lineNumber,
             startColumn: word.startColumn,
