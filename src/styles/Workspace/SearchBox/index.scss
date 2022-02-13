@@ -1,10 +1,9 @@
 .searchbox__container {
-  padding: 20px;
+  padding: 12px;
   margin-right: -10px;
   &__results {
     height: calc(100vh - 75px);
     overflow: auto;
-    margin-top: 15px;
     &::-webkit-scrollbar {
       width: 0px;
     }
@@ -58,9 +57,9 @@
     .title_and_description {
       position: relative;
     }
-    &:active {
-      background: var(--off-background);
-    }
+    // &:active {
+    //   background: var(--off-background);
+    // }
     .list_description {
       width: 80%;
       margin-top: 10px;

@@ -14,7 +14,9 @@ const Accordian : React.FC<Props> = ({i, expanded, setExpanded, item, changeText
     <motion.div className="accordian_container">
       <motion.header
         initial={false}
-        onClick={() => {
+      >
+        <motion.div className="result_box">
+          <motion.div className="title_and_description" onClick={() => {
           let newList: Array<number>;
           if(isOpen){
             newList = expanded.filter(n => n !== i);
@@ -25,14 +27,11 @@ const Accordian : React.FC<Props> = ({i, expanded, setExpanded, item, changeText
             newList = expanded;
           }
           setExpanded(newList);
-        }}
-      >
-        <motion.div className="result_box">
-          <motion.div className="title_and_description">
+        }}>
             <motion.h4 className="list_heading">{item.label}</motion.h4>
             <motion.p className="list_description">{item.description}</motion.p>
             <motion.div className="arrow-up-down-box">
-              {!isOpen ? <IoChevronUpOutline /> : <IoChevronDownOutline />}
+              {!isOpen ? <IoChevronDownOutline /> : <IoChevronUpOutline />}
             </motion.div>
           </motion.div>
           <AnimatePresence initial={true}>
@@ -40,27 +39,26 @@ const Accordian : React.FC<Props> = ({i, expanded, setExpanded, item, changeText
               <motion.section
                 key="content"
                 className='hidden_section'
-                // initial="collapsed"
-                // animate="open"
-                // exit="collapsed"
-                // variants={{
-                //   open: { opacity: 1, height: "100%" },
-                //   collapsed: { opacity: 0, height: '0' }
-                // }}
-                // transition={{ duration: 0.2, ease: [0.04, 0.62, 0.23, 0.98] }}
+                initial="collapsed"
+                animate="open"
+                exit="collapsed"
+                variants={{
+                  open: { opacity: 1, height: "auto" },
+                  collapsed: { opacity: 0, height: 0 }
+                }}
+                transition={{ duration: 0.1 }}
               >
                 <motion.div className="syntax-box">
-                  <motion.h4>Syntax:</motion.h4>
+                  <motion.p>Syntax:</motion.p>
                   <SyntaxHighlighter style={state.theme == "default" ? materialLight : materialDark} language="sql">
                   {item.syntax}
                   </SyntaxHighlighter>
                 </motion.div>
-                {item.example?.map((example, index) => (
+                {item.example?.map((example) => (
                   <motion.div key={example}>
-                    <motion.h4>
-                      Example
-                      {item && item.example && item.example.length > 1 ? ` ${index + 1}` : ''}:
-                    </motion.h4>
+                    <motion.p>
+                      Example :
+                    </motion.p>
                     <motion.div onClick={() => changeText(example)}>
                       <SyntaxHighlighter style={state.theme == "default" ? materialLight : materialDark} language="sql">{example}</SyntaxHighlighter>
                     </motion.div>

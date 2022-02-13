@@ -17,7 +17,7 @@
     justify-content: center;
     align-items: center;
     &.btn-active {
-      border-left: 4px solid #212121;
+      border-left: 4px solid var(--border-nav-icon);
     }
     &:hover {
       background: var(--primary-alt);

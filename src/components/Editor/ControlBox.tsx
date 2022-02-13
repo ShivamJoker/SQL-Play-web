@@ -48,17 +48,17 @@ const ControlBox: React.FC<Props> = ({editorText, onResult}) => {
   }
 
   return(
-    <div className="sql_codearea__control_box">
-      <button className="sql_codearea__control_box__button">
+    <div className="code_container__control_box">
+      {/* <button className="code_container__control_box__button">
         <AiOutlineArrowUp size={20} color="var(--bg-reverse)"/>
       </button>
-      <button className="sql_codearea__control_box__button">
+      <button className="code_container__control_box__button">
         <AiOutlineArrowDown size={20} color="var(--bg-reverse)"/>
       </button>
-      <button className="sql_codearea__control_box__button">
+      <button className="code_container__control_box__button">
         <MdClearAll size={20} color="var(--bg-reverse)"/>
-      </button>
-      <button className="sql_codearea__control_box__button" id='run-sql-button' onClick={onRun}>
+      </button> */}
+      <button className="code_container__control_box__button" id='run-sql-button' onClick={onRun}>
         Run <AiOutlineArrowRight size={20} color="var(--bg-reverse)"/>
       </button>
     </div>

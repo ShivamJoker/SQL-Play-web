@@ -1,17 +1,15 @@
-.sql_playground {
-  overflow: auto;
-}
-.sql_codearea{
+.code_container{
   position: relative;
   width: 100%;
   &__textarea{
-    border: 2px dashed var(--bg-reverse-alt);
+    border: 2px solid var(--border-editor);
+    border-radius: 5px;
     margin: 10px;
     padding: 10px;
   }
   &__control_box{
     position: absolute;
-    bottom: 15px;
+    bottom: 25px;
     right: 25px;
     height: 40px;
     display: flex;
@@ -27,12 +25,15 @@
       align-items: center;
       cursor: pointer;
       &:last-child{
-        border: 2px solid var(--bg-reverse);
+        border: 2px solid var(--border-run);
         border-radius: 5px;
         padding: 5px;
-        color: var(--bg-reverse);
+        color: var(--border-run);
         gap: 5px;
         font-size: 16px;
+        svg {
+          fill: var(--border-run)
+        }
         &.focusing, &:active {
           color: var(--bg);
           background: var(--bg-reverse);

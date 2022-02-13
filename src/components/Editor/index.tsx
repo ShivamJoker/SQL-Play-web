@@ -8,6 +8,7 @@ import ControlBox from './ControlBox';
 import { QueryExecResult } from 'sql.js';
 import ResultsTable from './ResultsTable';
 import { AppContext } from '@contexts/AppContext';
+import { v4 } from 'uuid';
 
 const SQLEditor = () => {
   const monaco = useMonaco();
@@ -15,7 +16,7 @@ const SQLEditor = () => {
   const [monacoEditor, setMonacoEditor] = useState<monacoModule.editor.IStandaloneCodeEditor>();
   const [editorText, setEditorText] = useState<string>();
   const [sqlResults, setSQLResults] = useState<QueryExecResult[]>();
-  const {state: {editorText: newEditorText, theme}} = useContext(AppContext);
+  const {state: {editorText: newEditorText, theme}, dispatch} = useContext(AppContext);
 
   useEffect(() => {
     getSQLData().then((data) => setSQLData(data))
@@ -26,7 +27,7 @@ const SQLEditor = () => {
     if(newEditorText.length && monacoEditor) {
       monacoEditor.setValue(newEditorText);
     }
-  }, [newEditorText, monacoEditor])
+  }, [newEditorText, monacoEditor]);
 
   useEffect(() => {
     if (!monaco?.languages) return;
@@ -88,6 +89,9 @@ const SQLEditor = () => {
     }
   }, [monaco, monacoEditor])
 
+  useEffect(() => {
+    dispatch({type: 'update_editor_text', text: 'SELECT * from employees'})
+  }, []);
 
   // functions
 
@@ -97,8 +101,8 @@ const SQLEditor = () => {
   return (
     <div> {/* empty div for react-split.js */}
       <div className="sql_playground">
-        <div className="sql_codearea">
-          <div className="sql_codearea__textarea">
+        <div className="code_container">
+          <div className="code_container__textarea">
             <Editor
               height="200px"
               language="sql"
@@ -119,16 +123,16 @@ const SQLEditor = () => {
                 lineNumbersMinChars: 0,
                 autoIndent: 'full',
                 renderLineHighlight: 'none',
+                fontSize: 16,
               }}
+              value={editorText}
               onChange={editorOnChange}
             />
           </div>
         <ControlBox editorText={editorText ? editorText : ''} onResult={setSQLResults} />
         </div>
           <div className="sql_result_container">
-            {sqlResults?.map((table) => (
-              <ResultsTable table={table} />  
-            ))}
+            <ResultsTable table={sqlResults ? sqlResults[0] : undefined} />  
           </div>
       </div>
     </div>

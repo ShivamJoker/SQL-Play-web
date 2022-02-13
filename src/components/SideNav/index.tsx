@@ -28,10 +28,10 @@ const SideNav = () => {
       title: 'settings',
       icon: AiOutlineSetting,
     },
-    {
-      title: 'premium',
-      icon: AiOutlineCrown,
-    },
+    // {
+    //   title: 'premium',
+    //   icon: AiOutlineCrown,
+    // },
   ];
 
   const buttonPress = (btnKey: IGlobalState['activeSidebarTab']) => {
