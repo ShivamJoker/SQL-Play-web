@@ -13,7 +13,8 @@ table {
     overflow: hidden !important;
     text-overflow: ellipsis;
     padding: 10px;
-    border: 2px solid rgb(255, 255, 0);
+    border: 2px solid var(--primary);
+    max-width: 160px;
   }
   td{
     color: var(--bg-reverse);

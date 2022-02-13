@@ -1,12 +1,4 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tsConfigPaths from 'vite-tsconfig-paths';
-import { ManifestOptions, VitePWA, VitePWAOptions } from 'vite-plugin-pwa';
-
-// https://vitejs.dev/config/
-
-const manifest: ManifestOptions = {
-  categories: [],
+{
   "name": "SQL",
   "short_name": "SQL Play",
   "theme_color": "#fdd835",
@@ -57,32 +49,5 @@ const manifest: ManifestOptions = {
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  dir: 'ltr',
-  iarc_rating_id : '',
-  id: 'sql-playground',
-  lang: 'en',
-  prefer_related_applications: false,
-  protocol_handlers: [],
-  publicPath: '/',
-  related_applications: [],
-  screenshots: [],
-  shortcuts: [],
+  ]
 }
-
-export default defineConfig({
-  plugins: [react(), tsConfigPaths(), VitePWA({manifest,})],
-  server: {
-    https: {
-      cert: './localhost.pem',
-      key: './localhost-key.pem',
-    },
-  },
-  build:{
-    rollupOptions:{
-      output: {
-        // manualChunks
-      }
-    }
-  }
-});

@@ -11,6 +11,7 @@ function App() {
   const {state, dispatch} = useContext(AppContext);
 
   const selectColorTheme = () => {
+
     const isSchemeDark = window.matchMedia('(prefers-color-scheme: dark)');
 
     if(isSchemeDark.matches){
@@ -46,6 +47,13 @@ function App() {
     }else {
       selectColorTheme();
     }
+  }, []);
+
+
+  useEffect(() => {
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener('change', (e) => selectColorTheme());
   }, []);
 
   return (
