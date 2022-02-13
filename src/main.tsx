@@ -1,9 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import '@styles/index.scss';
-import App from '@components/App';
-import { AppProvider } from '@contexts/AppContext';
-import './utils/db';
+import React from "react";
+import ReactDOM from "react-dom";
+import "@styles/index.scss";
+import App from "@components/App";
+import { AppProvider } from "@contexts/AppContext";
+import { registerSW } from "virtual:pwa-register";
+
+import "./utils/db";
+
+const updateSW = registerSW({
+  onNeedRefresh() {},
+  onOfflineReady() {},
+});
 
 ReactDOM.render(
   <React.StrictMode>
@@ -11,5 +18,5 @@ ReactDOM.render(
       <App />
     </AppProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );

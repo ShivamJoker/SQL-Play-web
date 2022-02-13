@@ -25,5 +25,5 @@
       "@utils/*": ["utils/*"],
     }
   },
-  "include": ["./src"]
+  "include": ["./src", "node_modules/vite-plugin-pwa/client.d.ts"]
 }
