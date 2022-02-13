@@ -3,7 +3,32 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  background: var(--bg);
+  color: var(--bg-reverse);
 }
+.app.default{
+  --primary: #fdd835;
+  --primary-alt: #a57c00;
+  --bg: #fff;
+  --bg-alt: #F2F2F2;
+  --off-background: #eee;
+  --bg-reverse: #000;
+  --bg-reverse-alt: #212121;
+}
+
+.app.dark{
+  --primary: #fdd835;
+  --primary-alt: #a57c00;
+  --bg: #1e1e1e;
+  --bg-alt: #222;
+  --off-background: #444;
+  --bg-reverse: #fff;
+  --bg-reverse-alt: #eee;
+}
+
 .gutter {
-  background: #F2F2F2;
+  background: var(--bg-alt);
+}
+.split-container {
+  width: calc(100% - 50px);
 }

@@ -1,0 +1,20 @@
+.settings-container{
+  width: 100%;
+  padding: 30px 20px;
+  font-size: 18px;
+  .theme-box{
+    display: flex;
+    justify-content: space-between;
+    select {
+      width: 100px;
+      background: transparent;
+      outline: none;
+      border: 2px solid var(--bg-reverse);
+      color: var(--bg-reverse);
+      padding: 5px;
+      option {
+        background: var(--bg);
+      }
+    }
+  }
+}

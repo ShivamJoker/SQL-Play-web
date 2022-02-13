@@ -11,7 +11,7 @@ const SearchBox: React.FC = () => {
   const [searchingTextList, setSearchingTextList] = useState<sqlSyntaxes[]>();
   const [sqlSyntaxData, setSqlSyntaxData] = useState<sqlSyntaxes[]>();
   const [inputText, setInputText] = useState<string>();
-  const [expanded, setExpanded] = useState<false | number>(false);
+  const [expanded, setExpanded] = useState<Array<number>>([]);
   const {dispatch} = useContext(AppContext);
   useEffect(() => {
 
@@ -31,7 +31,7 @@ const SearchBox: React.FC = () => {
       setSearchingTextList(sqlSyntaxData);
       return;
     };
-    const filtered =sqlSyntaxData?.filter((item) => {
+    const filtered = sqlSyntaxData?.filter((item) => {
       const keywords = `${item.title} ${item.tag} ${item.description}`;
       const index = keywords.toLowerCase().indexOf(inputText.toLowerCase());
       return index !== -1;

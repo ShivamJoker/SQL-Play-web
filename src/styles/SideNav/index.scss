@@ -1,6 +1,6 @@
 .side_nav {
   width: 50px;
-  background: #fdd835;
+  background: var(--primary);
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -20,7 +20,7 @@
       border-left: 4px solid #212121;
     }
     &:hover {
-      background: #a57c00;
+      background: var(--primary-alt);
     }
   }
 }
