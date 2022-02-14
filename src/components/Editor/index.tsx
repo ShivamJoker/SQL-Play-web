@@ -107,6 +107,7 @@ const SQLEditor = () => {
                   vertical: 'auto',
                   horizontal: 'auto',
                   verticalScrollbarSize: 0,
+                  horizontalScrollbarSize: 4,
                 },
                 lineNumbers: 'off',
                 glyphMargin: false,
