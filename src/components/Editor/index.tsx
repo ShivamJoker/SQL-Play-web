@@ -8,26 +8,17 @@ import ControlBox from './ControlBox';
 import { QueryExecResult } from 'sql.js';
 import ResultsTable from './ResultsTable';
 import { AppContext } from '@contexts/AppContext';
-import { v4 } from 'uuid';
 
 const SQLEditor = () => {
   const monaco = useMonaco();
   const [sqlSyntaxes, setSQLData] = useState<sqlSyntaxes[] | undefined>();
   const [monacoEditor, setMonacoEditor] = useState<monacoModule.editor.IStandaloneCodeEditor>();
-  const [editorText, setEditorText] = useState<string>();
   const [sqlResults, setSQLResults] = useState<QueryExecResult[]>();
-  const {state: {editorText: newEditorText, theme}, dispatch} = useContext(AppContext);
+  const {state: {editorText, theme}, dispatch} = useContext(AppContext);
 
   useEffect(() => {
     getSQLData().then((data) => setSQLData(data))
   }, []);
-
-
-  useEffect(() => {
-    if(newEditorText.length && monacoEditor) {
-      monacoEditor.setValue(newEditorText);
-    }
-  }, [newEditorText, monacoEditor]);
 
   useEffect(() => {
     if (!monaco?.languages) return;
@@ -89,14 +80,15 @@ const SQLEditor = () => {
     }
   }, [monaco, monacoEditor])
 
-  useEffect(() => {
-    dispatch({type: 'update_editor_text', text: 'SELECT * from employees'})
-  }, []);
-
   // functions
 
-  const onMount: OnMount = (editor) => setMonacoEditor(editor);
-  const editorOnChange: OnChange = (text) => setEditorText(text?.trim());
+  const onMount: OnMount = (editor) => {
+    setMonacoEditor(editor);
+    dispatch({type: 'update_editor_text', text: 'SELECT * FROM employees;'});
+  };
+  const editorOnChange: OnChange = (text) => {
+    dispatch({type: 'update_editor_text', text: text ? text.trim() : ''})
+  };
 
   return (
     <div> {/* empty div for react-split.js */}
@@ -129,7 +121,7 @@ const SQLEditor = () => {
               onChange={editorOnChange}
             />
           </div>
-        <ControlBox editorText={editorText ? editorText : ''} onResult={setSQLResults} />
+        <ControlBox editorText={editorText} onResult={setSQLResults} />
         </div>
           <div className="sql_result_container">
             <ResultsTable table={sqlResults ? sqlResults[0] : undefined} />  

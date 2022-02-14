@@ -22,11 +22,12 @@ function App() {
       })
 
     } else {
-
-      dispatch({
-        type: 'switch_theme',
-        theme: 'default',
-      })
+      if(state.theme !== "default"){
+        dispatch({
+          type: 'switch_theme',
+          theme: 'default',
+        })
+      }
     }
 
   }
@@ -51,9 +52,9 @@ function App() {
 
 
   useEffect(() => {
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener('change', (e) => selectColorTheme());
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', (e) => {
+        selectColorTheme()
+    });
   }, []);
 
   return (

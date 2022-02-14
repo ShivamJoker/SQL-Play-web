@@ -1,11 +1,10 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { IoChevronUpOutline, IoChevronDownOutline } from "react-icons/io5";
 import {Props} from '~types/components/SearchBox/Accordian';
-import {PrismAsyncLight as SyntaxHighlighter} from 'react-syntax-highlighter';
-
-import {materialLight, materialDark} from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useContext, useState } from "react";
 import { AppContext } from "@contexts/AppContext";
+import CodeHighlighter from "./CodeHighlighter";
+import randomString from "@utils/randomString";
 
 const Accordian : React.FC<Props> = ({i, expanded, setExpanded, item, changeText}) => {
   const [isOpen, setIsOpen] = useState<boolean>();
@@ -48,20 +47,20 @@ const Accordian : React.FC<Props> = ({i, expanded, setExpanded, item, changeText
                 }}
                 transition={{ duration: 0.1 }}
               >
-                <motion.div className="syntax-box">
-                  <motion.p>Syntax:</motion.p>
-                  <SyntaxHighlighter style={state.theme == "default" ? materialLight : materialDark} language="sql">
-                  {item.syntax}
-                  </SyntaxHighlighter>
-                </motion.div>
+                {item.syntax ? (
+                  <motion.div className="syntax-box" key={item.id}>
+                    <motion.p>Syntax:</motion.p>
+                    {
+                      typeof item.syntax === "string" ? <CodeHighlighter changeText={changeText} text={item.syntax} theme={state.theme} /> : item.syntax.map((syntax) => <CodeHighlighter key={randomString()} changeText={changeText} text={syntax} theme={state.theme} />)
+                    }
+                  </motion.div>
+                ) : null}
                 {item.example?.map((example) => (
                   <motion.div key={example}>
                     <motion.p>
                       Example :
                     </motion.p>
-                    <motion.div onClick={() => changeText(example)}>
-                      <SyntaxHighlighter style={state.theme == "default" ? materialLight : materialDark} language="sql">{example}</SyntaxHighlighter>
-                    </motion.div>
+                    <CodeHighlighter changeText={changeText} text={example} theme={state.theme} />
                   </motion.div>
                 ))}
               </motion.section>

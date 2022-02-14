@@ -4,6 +4,8 @@ import "@styles/index.scss";
 import App from "@components/App";
 import { AppProvider } from "@contexts/AppContext";
 import { registerSW } from "virtual:pwa-register";
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import "./utils/db";
 
@@ -14,9 +16,10 @@ const updateSW = registerSW({
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppProvider>
-      <App />
-    </AppProvider>
+      <AppProvider>
+        <App />
+        <ToastContainer />
+      </AppProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -4,7 +4,7 @@ import type {IGlobalState} from '~types/global';
 import '@styles/Workspace/Settings/index.scss';
 const Settings: React.FC = () => {
   const {state, dispatch} = useContext(AppContext)
-  const [selectedTheme, setSelectedTheme] = useState<IGlobalState['theme']>();
+  const [selectedTheme, setSelectedTheme] = useState<IGlobalState['theme']>(state.theme);
   
   const onThemeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedTheme(e.target.value as IGlobalState['theme']);
