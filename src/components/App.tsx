@@ -13,7 +13,7 @@ function App() {
   const { state, dispatch } = useContext(AppContext);
   const hasListener = useRef(false);
 
-  const setStystemTheme = (isDark: boolean) => {
+  const setSystemTheme = (isDark: boolean) => {
     if (isDark) {
       return dispatch({
         type: "switch_theme",
@@ -33,13 +33,13 @@ function App() {
       return;
     }
 
-    setStystemTheme(matchMedia.matches);
+    setSystemTheme(matchMedia.matches);
 
     // only add listener if it doesn't exist
     if (hasListener.current) return;
     // listen for theme changes
     matchMedia.addEventListener("change", ({ matches }) =>
-      setStystemTheme(matches)
+      setSystemTheme(matches)
     );
 
     hasListener.current = true;

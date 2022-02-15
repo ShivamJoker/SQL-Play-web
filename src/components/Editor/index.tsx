@@ -98,7 +98,7 @@ const SQLEditor = () => {
             <Editor
               height="200px"
               language="sql"
-              theme={`${theme === "dark" ? "vs-dark" : 'vs-light'}`}
+              theme={`${theme === "dark" ? "vs-dark" : 'vs-default'}`}
               onMount={onMount}
               options={{
                 minimap: {enabled: false},

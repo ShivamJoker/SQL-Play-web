@@ -15,6 +15,7 @@
     "monaco-editor": "^0.32.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-fast-accordion": "^1.0.3",
     "react-highlight": "^0.14.0",
     "react-icons": "^4.3.1",
     "react-split": "^2.0.14",

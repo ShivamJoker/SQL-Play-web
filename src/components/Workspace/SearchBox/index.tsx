@@ -3,7 +3,7 @@ import '@styles/Workspace/SearchBox/index.scss';
 import { useContext, useEffect, useState } from "react";
 import getSQLData from "@utils/getSQLData";
 import sqlSyntaxes from "~types/sqlSyntaxes";
-import Accordian from "./Accordian";
+import Accordian from "./Accordian/index2";
 import 'highlight.js/styles/vs.css'
 import { AppContext } from "@contexts/AppContext";
 
@@ -54,8 +54,10 @@ const SearchBox: React.FC = () => {
             </button>
           </div>
           <div className="searchbox__container__results">
-            
-            {searchingTextList ? searchingTextList.map((item, index) => (
+            <Accordian items={searchingTextList ? searchingTextList : []} changeText={(text) =>
+                  dispatch({ type:'update_editor_text', text })
+            }/>
+            {/* {searchingTextList ? searchingTextList.map((item, index) => (
               <Accordian
                 item={item}
                 i={index}
@@ -66,7 +68,7 @@ const SearchBox: React.FC = () => {
                   dispatch({ type:'update_editor_text', text })
                 }
               />
-            )) : null}
+            )) : null} */}
           </div>
         </div>;
 }

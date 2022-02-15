@@ -1,7 +1,7 @@
-import { v4 } from "uuid";
 import { QueryExecResult } from "sql.js";
 import '@styles/Editor/ResultsTable.scss'
 import React from "react";
+import randomString from "@utils/randomString";
 interface Props {
 table: QueryExecResult | undefined,
 };
@@ -15,8 +15,8 @@ const ResultsTable: React.FC<Props> = ({table}) => {
         <tr className="headers">
         {table.columns.map((column) => (
           <th
-          id={`result-table-column-${v4()}`}
-          key={`result-table-column-${v4()}`}>
+          id={`result-table-column-${randomString()}`}
+          key={`result-table-column-${randomString()}`}>
             {column}
           </th>
         ))}
@@ -25,13 +25,13 @@ const ResultsTable: React.FC<Props> = ({table}) => {
     <tbody>
      {
       table.values.map((values) => (
-        <React.Fragment key={`result-table-fragment-${v4()}`}>
-          <tr key={`result-table-tr-${v4()}`}>
+        <React.Fragment key={`result-table-fragment-${randomString()}`}>
+          <tr key={`result-table-tr-${randomString()}`}>
             {values.map(val => (
             <td
-            key={`result-table-td-${v4()}`}
-            id={`result-table-td-${v4()}`}>
-              {val ? val : <i key={`result-table-td-i-${v4()}`}>null</i>}
+            key={`result-table-td-${randomString()}`}
+            id={`result-table-td-${randomString()}`}>
+              {val ? val : <i key={`result-table-td-i-${randomString()}`}>null</i>}
             </td>
             ))}
           </tr>
