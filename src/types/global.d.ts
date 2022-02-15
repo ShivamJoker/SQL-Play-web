@@ -1,6 +1,6 @@
 export interface IGlobalState {
   activeSidebarTab: "search" | "settings" | "premium";
-  theme: "dark" | "default" | "system";
+  theme: "dark" | "light" | "system";
   sidebarCollapsed: boolean;
   sidebarPosition: "left" | "right";
   editorText: string;

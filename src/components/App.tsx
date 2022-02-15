@@ -1,59 +1,64 @@
-import SideNav from './SideNav';
-import Workspace from './Workspace';
-import '@styles/app.scss';
-import Split from 'react-split';
-import SQLEditor from './Editor';
-import { useContext, useEffect } from 'react';
-import { AppContext } from '@contexts/AppContext';
-import { IGlobalState } from '~types/global';
+import SideNav from "./SideNav";
+import Workspace from "./Workspace";
+import "@styles/app.scss";
+import Split from "react-split";
+import SQLEditor from "./Editor";
+import { useContext, useEffect, useRef } from "react";
+import { AppContext } from "@contexts/AppContext";
+import { IGlobalState } from "~types/global";
+
+const matchMedia = window.matchMedia("(prefers-color-scheme: dark)");
 
 function App() {
-  const {state, dispatch} = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
+  const hasListener = useRef(false);
 
-  const selectColorTheme = () => {
-
-    const isSchemeDark = window.matchMedia('(prefers-color-scheme: dark)');
-
-    if(isSchemeDark.matches){
-
-      dispatch({
-        type: 'switch_theme',
-        theme: 'dark',
-      })
-
-    } else {
-      if(state.theme !== "default"){
-        dispatch({
-          type: 'switch_theme',
-          theme: 'default',
-        })
-      }
+  const setStystemTheme = (isDark: boolean) => {
+    if (isDark) {
+      return dispatch({
+        type: "switch_theme",
+        theme: "dark",
+      });
     }
 
-  }
+    dispatch({
+      type: "switch_theme",
+      theme: "light",
+    });
+  };
 
+  // listen to the theme state
   useEffect(() => {
-    if(state.theme === "system") {
-      selectColorTheme();
+    if (state.theme !== "system") {
+      return;
     }
+
+    setStystemTheme(matchMedia.matches);
+
+    // only add listener if it doesn't exist
+    if (hasListener.current) return;
+    // listen for theme changes
+    matchMedia.addEventListener("change", ({ matches }) =>
+      setStystemTheme(matches)
+    );
+
+    hasListener.current = true;
   }, [state.theme]);
 
   useEffect(() => {
-    const theme = localStorage.getItem('theme') as IGlobalState['theme'] | null;
-    if(theme && state.theme !== "system") {
-      dispatch({
-        type: 'switch_theme',
-        theme
-      })
-    }else {
-      selectColorTheme();
+    // try to get theme from localStorage first
+    const savedTheme = localStorage.getItem("theme") as
+      | IGlobalState["theme"]
+      | null;
+
+    // if theme is not system then only change the context
+    if (!savedTheme || savedTheme === "system") {
+      return;
     }
-  }, []);
 
-
-  useEffect(() => {
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', (e) => {
-        selectColorTheme()
+    dispatch({
+      type: "switch_theme",
+      theme: savedTheme,
     });
   }, []);
 
