@@ -1,19 +1,20 @@
 import { execCmd } from '@utils/db';
-import { useEffect, useState } from 'react';
-import {AiOutlineArrowUp, AiOutlineArrowDown, AiOutlineArrowRight} from 'react-icons/ai';
-import {MdClearAll} from 'react-icons/md';
+import { useContext, useEffect, useState } from 'react';
+import { AiOutlineArrowRight} from 'react-icons/ai';
 import { QueryExecResult } from 'sql.js';
+import {toast} from 'react-toastify';
+import { AppContext } from '@contexts/AppContext';
 
 interface Props {
   editorText: string;
-  onResult?: (results: QueryExecResult[]) => void;
+  onResult: (results: QueryExecResult[] | undefined) => void;
 }
 
 const ControlBox: React.FC<Props> = ({editorText, onResult}) => {
   // hooks
   const [commandsHistory, updateCommandsHistory] = useState<string[]>([]);
   const [commandHistoryIndex, updateCommandHistoryIndex] = useState<number>(0);
-
+  const {state} = useContext(AppContext);
 
   // effects
   useEffect(() => {
@@ -35,8 +36,27 @@ const ControlBox: React.FC<Props> = ({editorText, onResult}) => {
 
   const onRun = () => {
     addInHistory(editorText);
-    const results = execCmd(editorText);
-    if(results && onResult) onResult(results);
+    try {
+      const results = execCmd(editorText);
+      if(results && results.length){
+        onResult(results);
+      } else {
+        onResult(undefined);
+      }
+    } catch (error: any) {
+
+      const message = error.message.charAt(0).toUpperCase() + error.message.slice(1);
+
+      toast(message, {
+        type: 'error',
+        theme: 'colored',
+        hideProgressBar: true,
+        position: 'bottom-left',
+        pauseOnFocusLoss: false,
+        autoClose: 5000,
+      });
+      onResult(undefined)
+    }
   }
 
 
@@ -48,18 +68,18 @@ const ControlBox: React.FC<Props> = ({editorText, onResult}) => {
   }
 
   return(
-    <div className="sql_codearea__control_box">
-      <button className="sql_codearea__control_box__button">
-        <AiOutlineArrowUp size={20} />
+    <div className="code_container__control_box">
+      {/* <button className="code_container__control_box__button">
+        <AiOutlineArrowUp size={20} color="var(--bg-reverse)"/>
       </button>
-      <button className="sql_codearea__control_box__button">
-        <AiOutlineArrowDown size={20}/>
+      <button className="code_container__control_box__button">
+        <AiOutlineArrowDown size={20} color="var(--bg-reverse)"/>
       </button>
-      <button className="sql_codearea__control_box__button">
-        <MdClearAll size={20}/>
-      </button>
-      <button className="sql_codearea__control_box__button" id='run-sql-button' onClick={onRun}>
-        Run <AiOutlineArrowRight size={20}/>
+      <button className="code_container__control_box__button">
+        <MdClearAll size={20} color="var(--bg-reverse)"/>
+      </button> */}
+      <button className="code_container__control_box__button" id='run-sql-button' onClick={onRun}>
+        Run <AiOutlineArrowRight size={20} color="var(--bg-reverse)"/>
       </button>
     </div>
   )

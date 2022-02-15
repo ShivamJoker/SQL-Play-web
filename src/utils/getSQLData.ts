@@ -19,7 +19,7 @@ const getSQLData = async (): Promise<sqlSyntaxes[]> => {
       const item: sqlSyntaxes = {
         label: cmd.title,
         documentation: `${cmd.description}\n\n# Syntax:\n${Array.isArray(cmd.syntax) ? cmd.syntax.join('\n') : cmd.syntax}\n\n${cmd.example ? `# Example:\n${cmd.example}` : ''}`,
-        insertText: Array.isArray(cmd.syntax) ? cmd.syntax.join('\n') : cmd.syntax,
+        insertText: Array.isArray(cmd.syntax) ? cmd.syntax[0] : cmd.syntax,
         ...cmd
       }
       return item;

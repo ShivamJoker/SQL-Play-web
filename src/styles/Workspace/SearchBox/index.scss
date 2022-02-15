@@ -1,15 +1,18 @@
 .searchbox__container {
-  padding: 20px;
+  padding: 12px;
+  margin-right: -10px;
   &__results {
     height: calc(100vh - 75px);
     overflow: auto;
-    margin-top: 15px;
     &::-webkit-scrollbar {
       width: 0px;
     }
   }
   &__input_box {
     position: relative;
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
     &__input {
       width: 100%;
       height: 40px;
@@ -17,9 +20,11 @@
       border: none;
       padding: 5px 10px;
       outline: none;
+      background: var(--bg);
+      color: var(--bg-reverse);
       font-size: 18px;
       &::placeholder {
-        color: black;
+        color: var(--bg-reverse);
       }
       &::-webkit-search-cancel-button,
       &::-webkit-search-decoration,
@@ -41,28 +46,32 @@
       outline: none;
       border: none;
       cursor: pointer;
+      svg{
+        color: var(--bg-reverse);
+      }
     }
   }
   .result_box {
-    background: #fff;
+    background: var(--bg);
     padding: 10px;
     border-radius: 10px;
-    cursor: pointer;
+    color: var(--bg-reverse);
     .title_and_description {
       position: relative;
+      cursor: pointer;
     }
-    &:active {
-      background: #eee;
-    }
-    .list_description {
-      width: 80%;
-      margin-top: 10px;
-    }
+    // &:active {
+      //   background: var(--off-background);
+      // }
+      .list_description {
+        width: 80%;
+        margin-top: 10px;
+      }
     .arrow-up-down-box {
       position: absolute;
       top: 0px;
       right: 0px;
-      width: 20%;
+      width: 10%;
       height: 100%;
       display: flex;
       justify-content: center;
@@ -73,6 +82,9 @@
 
 .accordian_container {
   margin: 10px 0px;
+  &:first-child{
+    margin-top: 0px;
+  }
 }
 pre, code {
   white-space: pre;
@@ -88,9 +100,12 @@ pre, code {
   padding: 0.5em;
 }
 .hidden_section{
-  width: 90%;
+  width: 100%;
+}
+.syntax_highlighted {
+  background: transparent !important;
 }
 .example_highlighted{
-  background: #eee !important;
+  background: var(--off-background) !important;
   margin: 10px 0px;
 }

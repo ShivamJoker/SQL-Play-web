@@ -1,7 +1,7 @@
 import Editor, { OnChange, OnMount, useMonaco } from '@monaco-editor/react';
 import '@styles/Editor/index.scss';
 import { useContext, useEffect, useState } from 'react';
-import { editor, IRange, languages } from 'monaco-editor';
+import * as monacoModule from 'monaco-editor';
 import getSQLData from '@utils/getSQLData';
 import sqlSyntaxes from '~types/sqlSyntaxes';
 import ControlBox from './ControlBox';
@@ -12,30 +12,22 @@ import { AppContext } from '@contexts/AppContext';
 const SQLEditor = () => {
   const monaco = useMonaco();
   const [sqlSyntaxes, setSQLData] = useState<sqlSyntaxes[] | undefined>();
-  const [monacoEditor, setMonacoEditor] = useState<editor.IStandaloneCodeEditor>();
-  const [editorText, setEditorText] = useState<string>();
+  const [monacoEditor, setMonacoEditor] = useState<monacoModule.editor.IStandaloneCodeEditor>();
   const [sqlResults, setSQLResults] = useState<QueryExecResult[]>();
-  const {state: {editorText: newEditorText}} = useContext(AppContext);
+  const {state: {editorText, theme}, dispatch} = useContext(AppContext);
 
   useEffect(() => {
     getSQLData().then((data) => setSQLData(data))
   }, []);
-
-
-  useEffect(() => {
-    if(newEditorText.length && monacoEditor) {
-      monacoEditor.setValue(newEditorText);
-    }
-  }, [newEditorText, monacoEditor])
 
   useEffect(() => {
     if (!monaco?.languages) return;
 
     const createDependencyProposals = (
       
-      range: IRange
+      range: monacoModule.IRange
 
-    ): languages.CompletionItem[] => {
+    ): monacoModule.languages.CompletionItem[] => {
         if(sqlSyntaxes){
           return sqlSyntaxes.map((item) => {
            return {
@@ -56,7 +48,7 @@ const SQLEditor = () => {
         provideCompletionItems: (model, position) => {
           const word = model.getWordUntilPosition(position);
   
-          const range: IRange = {
+          const range: monacoModule.IRange = {
             startLineNumber: position.lineNumber,
             endLineNumber: position.lineNumber,
             startColumn: word.startColumn,
@@ -88,20 +80,25 @@ const SQLEditor = () => {
     }
   }, [monaco, monacoEditor])
 
-
   // functions
 
-  const onMount: OnMount = (editor) => setMonacoEditor(editor);
-  const editorOnChange: OnChange = (text) => setEditorText(text?.trim());
+  const onMount: OnMount = (editor) => {
+    setMonacoEditor(editor);
+    dispatch({type: 'update_editor_text', text: 'SELECT * FROM employees;'});
+  };
+  const editorOnChange: OnChange = (text) => {
+    dispatch({type: 'update_editor_text', text: text ? text.trim() : ''})
+  };
 
   return (
     <div> {/* empty div for react-split.js */}
       <div className="sql_playground">
-        <div className="sql_codearea">
-          <div className="sql_codearea__textarea">
+        <div className="code_container">
+          <div className="code_container__textarea">
             <Editor
               height="200px"
               language="sql"
+              theme={`${theme === "dark" ? "vs-dark" : 'vs-light'}`}
               onMount={onMount}
               options={{
                 minimap: {enabled: false},
@@ -110,19 +107,26 @@ const SQLEditor = () => {
                   vertical: 'auto',
                   horizontal: 'auto',
                   verticalScrollbarSize: 0,
+                  horizontalScrollbarSize: 4,
                 },
+                lineNumbers: 'off',
+                glyphMargin: false,
+                folding: false,
+                lineDecorationsWidth: 0,
+                lineNumbersMinChars: 0,
                 autoIndent: 'full',
+                renderLineHighlight: 'none',
+                fontSize: 16,
               }}
+              value={editorText}
               onChange={editorOnChange}
             />
           </div>
-        <ControlBox editorText={editorText ? editorText : ''} onResult={setSQLResults} />
+        <ControlBox editorText={editorText} onResult={setSQLResults} />
         </div>
-        <div className="sql_result_container">
-          {sqlResults?.map((table) => (
-            <ResultsTable table={table} />  
-          ))}
-        </div>
+          <div className="sql_result_container">
+            <ResultsTable table={sqlResults ? sqlResults[0] : undefined} />  
+          </div>
       </div>
     </div>
   );

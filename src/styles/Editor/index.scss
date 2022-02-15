@@ -1,21 +1,17 @@
-.sql_playground {
-  padding-top: 10px;
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-}
-.sql_codearea{
+.code_container{
   position: relative;
   width: 100%;
   &__textarea{
-    border: 2px dashed #333;
+    border: 2px solid var(--border-editor);
+    border-radius: 5px;
     margin: 10px;
     padding: 10px;
+    padding-bottom: 2px;
   }
   &__control_box{
     position: absolute;
-    bottom: 15px;
-    right: 25px;
+    bottom: 10px;
+    right: 20px;
     height: 40px;
     display: flex;
     gap: 10px;
@@ -30,21 +26,28 @@
       align-items: center;
       cursor: pointer;
       &:last-child{
-        border: 2px solid black;
+        border: 2px solid var(--border-run);
         border-radius: 5px;
         padding: 5px;
+        color: var(--border-run);
         gap: 5px;
         font-size: 16px;
+        svg {
+          fill: var(--border-run)
+        }
         &.focusing, &:active {
-          color: white;
-          background: black;
+          color: var(--bg);
+          background: var(--bg-reverse);
+          svg{
+            fill: var(--bg);
+          }
         }
       }
     }
   }
 }
 .sql_result_container{
-  height: 100%;
-  width: 100%;
   overflow: auto;
+  width: inherit;
+  margin: 10px;
 }
