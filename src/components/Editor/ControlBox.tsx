@@ -1,4 +1,4 @@
-import { execCmd } from '@utils/db';
+import { execCmd, saveDBState } from '@utils/db';
 import { useContext, useEffect, useState } from 'react';
 import { AiOutlineArrowRight} from 'react-icons/ai';
 import { QueryExecResult } from 'sql.js';
@@ -43,6 +43,7 @@ const ControlBox: React.FC<Props> = ({editorText, onResult}) => {
       } else {
         onResult(undefined);
       }
+      saveDBState()
     } catch (error: any) {
 
       const message = error.message.charAt(0).toUpperCase() + error.message.slice(1);
