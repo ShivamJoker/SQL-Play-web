@@ -59,14 +59,17 @@
     .title_and_description {
       position: relative;
       cursor: pointer;
-    }
-    // &:active {
-      //   background: var(--off-background);
-      // }
+      .list_heading {
+        font-weight: 500;
+      }
       .list_description {
         width: 80%;
         margin-top: 10px;
       }
+    }
+    // &:active {
+      //   background: var(--off-background);
+      // }
     .arrow-up-down-box {
       position: absolute;
       top: 0px;

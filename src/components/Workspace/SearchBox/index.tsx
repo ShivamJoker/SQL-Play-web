@@ -54,9 +54,9 @@ const SearchBox: React.FC = () => {
             </button>
           </div>
           <div className="searchbox__container__results">
-            <Accordian items={searchingTextList ? searchingTextList : []} changeText={(text) =>
-                  dispatch({ type:'update_editor_text', text })
-            }/>
+            <div className="result_box">
+              <Accordian items={searchingTextList ? searchingTextList : []} />
+            </div>
             {/* {searchingTextList ? searchingTextList.map((item, index) => (
               <Accordian
                 item={item}
