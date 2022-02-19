@@ -51,11 +51,12 @@
       }
     }
   }
-  .result_box {
+  .acc-item {
     background: var(--bg);
     padding: 10px;
     border-radius: 10px;
     color: var(--bg-reverse);
+    margin: 10px 0px;
     .title_and_description {
       position: relative;
       cursor: pointer;
@@ -67,9 +68,6 @@
         margin-top: 10px;
       }
     }
-    // &:active {
-      //   background: var(--off-background);
-      // }
     .arrow-up-down-box {
       position: absolute;
       top: 0px;
