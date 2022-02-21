@@ -12,7 +12,7 @@ interface Props {
   changeText: (text: string) => void;
   theme: IGlobalState["theme"];
 }
-const CodeHighlighter: React.FC<Props> = ({ text, changeText, theme }) => {
+const CodeHighlighter = ({ text, changeText, theme }: Props) => {
   return (
     <motion.div onClick={() => changeText(text)}>
       <SyntaxHighlighter

@@ -10,7 +10,7 @@ interface Props {
   onResult: (results: QueryExecResult[] | undefined) => void;
 }
 
-const ControlBox: React.FC<Props> = ({editorText, onResult}) => {
+const ControlBox = ({editorText, onResult}: Props) => {
   // hooks
   const [commandsHistory, updateCommandsHistory] = useState<string[]>([]);
   const [commandHistoryIndex, updateCommandHistoryIndex] = useState<number>(0);

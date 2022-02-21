@@ -18,7 +18,7 @@ interface SubComponentProps extends sqlSyntaxes {
   theme: IGlobalState['theme']
 };
 
-const SummaryComponent: React.FC<SubComponentProps> = ({ label, description, isOpen}) => {
+const SummaryComponent = ({ label, description, isOpen}: SubComponentProps) => {
   return <div className="title_and_description" key={`div-${randomString()}`}>
       <h4 className="list_heading">{label}</h4>
       <p className="list_description">{description}</p>
@@ -28,7 +28,7 @@ const SummaryComponent: React.FC<SubComponentProps> = ({ label, description, isO
     </div>
 }
 
-const DetailComponent: React.FC<SubComponentProps> = ({syntax, id, example, changeText, theme }) => {
+const DetailComponent = ({syntax, id, example, changeText, theme }: SubComponentProps) => {
   return (
     <section
       key={`section-${randomString()}`}
@@ -52,7 +52,7 @@ const DetailComponent: React.FC<SubComponentProps> = ({syntax, id, example, chan
       ) : null}
     </section>
 )}
-const Accordion: React.FC<AccordionProps> = ({items, changeText}) => {
+const Accordion = ({items, changeText}: AccordionProps) => {
   items = items.map((item) => ({...item, changeText}))
   return (
     <ReactAccordion items={items} SummaryComponent={SummaryComponent} DetailComponent={DetailComponent} />

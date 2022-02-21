@@ -7,7 +7,7 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   active: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({
+const Button = ({
   Icon,
   active,
   ...props

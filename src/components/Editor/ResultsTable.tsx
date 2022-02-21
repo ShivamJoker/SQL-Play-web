@@ -6,7 +6,7 @@ interface Props {
 table: QueryExecResult | undefined,
 };
 
-const ResultsTable: React.FC<Props> = ({table}) => {
+const ResultsTable = ({table}: Props) => {
   if(!table) return null;
   
   return (
