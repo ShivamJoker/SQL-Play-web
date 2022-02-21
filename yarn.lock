@@ -3641,10 +3641,10 @@ react-dom@^17.0.2:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
-react-fast-accordion@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/react-fast-accordion/-/react-fast-accordion-1.0.4.tgz#6135e3f9893e43290e8b30170371c24006acb442"
-  integrity sha512-EH9Pn+TjcMxoOgx6uBJsgxZTcwh9cw3IJcygfEXh4Yg7AFn9Ptrxg8h/iRnYbZD8FeNwL27zOAjQzYAkKNl+/w==
+react-fast-accordion@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/react-fast-accordion/-/react-fast-accordion-1.0.10.tgz#d06180e95227d760ff36c1a5a6f454b23553ad3b"
+  integrity sha512-b4tVanjnVLwz84QdQqEKMhBtUQarFmlBZyPwRsA2ew80ozZ52iNJrFc/ozEq2GNS2oa+SKz6rhd2Lw1jYp55JA==
   dependencies:
     react "^17.0.2"
     react-dom "^17.0.2"
