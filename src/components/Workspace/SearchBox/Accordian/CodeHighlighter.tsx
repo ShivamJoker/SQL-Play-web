@@ -1,10 +1,10 @@
-import { motion } from "framer-motion";
-import { PrismAsyncLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import { LightAsync as SyntaxHighlighter } from "react-syntax-highlighter";
 
 import {
-  materialLight,
-  materialDark,
-} from "react-syntax-highlighter/dist/esm/styles/prism";
+  vs2015,
+  defaultStyle,
+} from "react-syntax-highlighter/dist/esm/styles/hljs";
+
 import { IGlobalState } from "~types/global";
 
 interface Props {
@@ -14,14 +14,14 @@ interface Props {
 }
 const CodeHighlighter: React.FC<Props> = ({ text, changeText, theme }) => {
   return (
-    <motion.div onClick={() => changeText(text)}>
+    <div onClick={() => changeText(text)}>
       <SyntaxHighlighter
-        style={theme == "light" ? materialLight : materialDark}
+        style={theme == "light" ? defaultStyle : vs2015}
         language="sql"
       >
         {text}
       </SyntaxHighlighter>
-    </motion.div>
+    </div>
   );
 };
 
