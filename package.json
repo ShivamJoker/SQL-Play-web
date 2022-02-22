@@ -10,12 +10,11 @@
   "dependencies": {
     "@monaco-editor/react": "^4.3.1",
     "@tauri-apps/api": "^1.0.0-rc.1",
-    "framer-motion": "^6.2.6",
     "idb-keyval": "^6.1.0",
     "monaco-editor": "^0.32.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-fast-accordion": "^1.0.4",
+    "react-fast-accordion": "^2.0.1",
     "react-highlight": "^0.14.0",
     "react-icons": "^4.3.1",
     "react-split": "^2.0.14",
@@ -24,7 +23,7 @@
     "sql.js": "^1.6.2"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^1.0.0-rc.4",
+    "@tauri-apps/cli": "^1.0.0-rc.5",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.10",
     "@types/react-highlight": "^0.12.5",
@@ -33,9 +32,9 @@
     "@types/uuid": "^8.3.4",
     "@vitejs/plugin-react": "^1.2.0",
     "gitmoji-cli": "^4.8.0",
-    "sass": "^1.49.7",
+    "sass": "^1.49.8",
     "typescript": "^4.5.5",
-    "vite": "^2.8.2",
+    "vite": "^2.8.4",
     "vite-plugin-pwa": "^0.11.13",
     "vite-tsconfig-paths": "^3.4.0",
     "workbox-window": "^6.4.2"
