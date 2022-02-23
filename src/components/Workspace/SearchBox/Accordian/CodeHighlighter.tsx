@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { LightAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { LightAsync as SyntaxHighlighter } from "react-syntax-highlighter";
 
 import {
   vs2015,

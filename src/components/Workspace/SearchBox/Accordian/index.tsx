@@ -1,11 +1,11 @@
-import { AppContext } from '@contexts/AppContext';
-import randomString from '@utils/randomString';
-import { useContext } from 'react';
-import ReactAccordion from 'react-fast-accordion';
-import { IoChevronDownOutline, IoChevronUpOutline } from 'react-icons/io5';
-import { IGlobalState } from '~types/global';
-import sqlSyntaxes from '~types/sqlSyntaxes';
-import CodeHighlighter from './CodeHighlighter';
+import { AppContext } from "@contexts/AppContext";
+import randomString from "@utils/randomString";
+import { useContext } from "react";
+import ReactAccordion from "react-fast-accordion";
+import { IoChevronDownOutline, IoChevronUpOutline } from "react-icons/io5";
+import { IGlobalState } from "~types/global";
+import sqlSyntaxes from "~types/sqlSyntaxes";
+import CodeHighlighter from "./CodeHighlighter";
 
 interface AccordionProps {
   items: sqlSyntaxes[],
