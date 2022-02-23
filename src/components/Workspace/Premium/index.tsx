@@ -1,5 +1,3 @@
-const Premium: React.FC = () => {
-  return <div>premium</div>;
-}
+const Premium: React.FC = () => <div>premium</div>;
 
 export default Premium;

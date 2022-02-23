@@ -1,4 +1,6 @@
-import { createContext, Dispatch, ReactNode, useReducer } from 'react';
+import {
+  createContext, Dispatch, ReactNode, useReducer,
+} from 'react';
 import { GlobalReducerActions, IGlobalState } from '~types/global';
 
 const initialState: IGlobalState = {
@@ -6,13 +8,12 @@ const initialState: IGlobalState = {
   sidebarCollapsed: false,
   sidebarPosition: 'left',
   theme: 'system',
-  editorText: ''
+  editorText: '',
 };
 
-const reducer = (state: IGlobalState, action: GlobalReducerActions ): IGlobalState => {
-
+const reducer = (state: IGlobalState, action: GlobalReducerActions): IGlobalState => {
   // declare all the cases here
-  
+
   switch (action.type) {
     case 'switch_sidebar_tab': {
       return { ...state, activeSidebarTab: action.tab };
@@ -33,11 +34,11 @@ export const AppContext = createContext<{
   dispatch: Dispatch<GlobalReducerActions>;
 }>({ state: initialState, dispatch: () => null });
 
-export const AppProvider = ({ children }: { children: ReactNode }) => {
+export function AppProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       {children}
     </AppContext.Provider>
   );
-};
+}

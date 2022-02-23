@@ -51,3 +51,7 @@
   width: inherit;
   margin: 10px;
 }
+
+.monaco-editor .scroll-decoration {
+  display: none !important;
+}

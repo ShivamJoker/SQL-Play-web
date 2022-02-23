@@ -1,13 +1,13 @@
-import SideNav from "./SideNav";
-import Workspace from "./Workspace";
-import "@styles/app.scss";
-import Split from "react-split";
-import SQLEditor from "./Editor";
-import { useContext, useEffect, useRef } from "react";
-import { AppContext } from "@contexts/AppContext";
-import { IGlobalState } from "~types/global";
+import SideNav from './SideNav';
+import Workspace from './Workspace';
+import '@styles/app.scss';
+import Split from 'react-split';
+import SQLEditor from './Editor';
+import { useContext, useEffect, useRef } from 'react';
+import { AppContext } from '@contexts/AppContext';
+import { IGlobalState } from '~types/global';
 
-const matchMedia = window.matchMedia("(prefers-color-scheme: dark)");
+const matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
 
 function App() {
   const { state, dispatch } = useContext(AppContext);
@@ -16,20 +16,20 @@ function App() {
   const setSystemTheme = (isDark: boolean) => {
     if (isDark) {
       return dispatch({
-        type: "switch_theme",
-        theme: "dark",
+        type: 'switch_theme',
+        theme: 'dark',
       });
     }
 
     dispatch({
-      type: "switch_theme",
-      theme: "light",
+      type: 'switch_theme',
+      theme: 'light',
     });
   };
 
   // listen to the theme state
   useEffect(() => {
-    if (state.theme !== "system") {
+    if (state.theme !== 'system') {
       return;
     }
 
@@ -38,26 +38,24 @@ function App() {
     // only add listener if it doesn't exist
     if (hasListener.current) return;
     // listen for theme changes
-    matchMedia.addEventListener("change", ({ matches }) =>
-      setSystemTheme(matches)
-    );
+    matchMedia.addEventListener('change', ({ matches }) => setSystemTheme(matches));
 
     hasListener.current = true;
   }, [state.theme]);
 
   useEffect(() => {
     // try to get theme from localStorage first
-    const savedTheme = localStorage.getItem("theme") as
-      | IGlobalState["theme"]
+    const savedTheme = localStorage.getItem('theme') as
+      | IGlobalState['theme']
       | null;
 
     // if theme is not system then only change the context
-    if (!savedTheme || savedTheme === "system") {
+    if (!savedTheme || savedTheme === 'system') {
       return;
     }
 
     dispatch({
-      type: "switch_theme",
+      type: 'switch_theme',
       theme: savedTheme,
     });
   }, []);

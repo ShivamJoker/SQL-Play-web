@@ -19,7 +19,7 @@
     &.btn-active {
       border-left: 4px solid var(--border-nav-icons);
     }
-    &:hover {
+    &:hover, &:focus-visible {
       background: var(--primary-alt);
     }
   }

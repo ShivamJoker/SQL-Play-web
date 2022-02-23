@@ -1,4 +1,4 @@
-import sqlSyntaxes from "~types/sqlSyntaxes";
+import sqlSyntaxes from '~types/sqlSyntaxes';
 
 export interface Props {
   i: number,

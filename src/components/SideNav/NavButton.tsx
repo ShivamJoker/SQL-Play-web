@@ -7,19 +7,21 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   active: boolean;
 }
 
-const Button = ({
+function Button({
   Icon,
   active,
   ...props
-}: ButtonProps) => {
+}: ButtonProps) {
   return (
     <button
+      role={"button"}
+      tabIndex={0}
       className={`side_nav__nav_btns ${active ? 'btn-active' : ''}`}
       {...props}
     >
       <Icon size={30} color="#212121" />
     </button>
   );
-};
+}
 
 export default Button;

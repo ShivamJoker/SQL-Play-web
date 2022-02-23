@@ -1,5 +1,5 @@
-import { IconType } from "react-icons";
-import { IGlobalState } from "./global";
+import { IconType } from 'react-icons';
+import { IGlobalState } from './global';
 
 interface SubNavButton {
   title: IGlobalState['activeSidebarTab'],
