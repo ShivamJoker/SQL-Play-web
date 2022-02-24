@@ -7,3 +7,4 @@ localhost.pem
 localhost-key.pem
 pnpm-lock.yaml
 yarn.lock
+yarn-error.log

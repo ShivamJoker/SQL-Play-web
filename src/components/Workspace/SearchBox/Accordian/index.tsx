@@ -80,11 +80,12 @@ const DetailComponent: React.FC<SubComponentProps> = ({
   );
 };
 const Accordion = ({ items }: AccordionProps) => {
-  const { dispatch } = useContext(AppContext);
+  const { dispatch, state } = useContext(AppContext);
 
   return (
     <ReactAccordion
       items={items}
+      theme={state.theme}
       updateEditorText={(text: string) =>
         dispatch({
           type: "update_editor_text",
