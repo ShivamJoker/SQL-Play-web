@@ -8,18 +8,20 @@ import sqlSyntaxes from "~types/sqlSyntaxes";
 import CodeHighlighter from "./CodeHighlighter";
 
 interface AccordionProps {
-  items: sqlSyntaxes[],
-  changeText: (text: string) => void;
-  theme: IGlobalState['theme']
+  items: sqlSyntaxes[];
 }
 
 interface SubComponentProps extends sqlSyntaxes {
-  isOpen: boolean,
-  changeText: AccordionProps['changeText'];
-  theme: IGlobalState['theme']
+  isOpen: boolean;
+  updateEditorText: (code: string) => void;
+  theme: IGlobalState["theme"];
 }
 
-function SummaryComponent({ label, description, isOpen }: SubComponentProps) {
+const SummaryComponent: React.FC<SubComponentProps> = ({
+  label,
+  description,
+  isOpen,
+}) => {
   return (
     <div className="title_and_description" key={`div-${randomString()}`}>
       <h4 className="list_heading">{label}</h4>
@@ -29,40 +31,71 @@ function SummaryComponent({ label, description, isOpen }: SubComponentProps) {
       </div>
     </div>
   );
-}
+};
 
-function DetailComponent({
-  syntax, id, example, changeText, theme,
-}: SubComponentProps) {
+const DetailComponent: React.FC<SubComponentProps> = ({
+  syntax,
+  id,
+  example,
+  updateEditorText,
+  theme,
+}) => {
   return (
-    <section
-      key={`section-${randomString()}`}
-      className="hidden_section"
-    >
+    <section className="hidden_section">
       {syntax ? (
         <div className="syntax-box" key={id}>
-          <p className='syntax-text'>Syntax:</p>
-          {
-            typeof syntax === 'string' ? <CodeHighlighter changeText={changeText} text={syntax} theme={theme} /> : syntax.map((syntax) => <CodeHighlighter key={randomString()} changeText={changeText} text={syntax} theme={theme} />)
-          }
+          <p>Syntax:</p>
+          {typeof syntax === "string" ? (
+            <CodeHighlighter
+              changeText={updateEditorText}
+              text={syntax}
+              theme={theme}
+            />
+          ) : (
+            syntax.map((syntax) => (
+              <CodeHighlighter
+                key={randomString()}
+                changeText={updateEditorText}
+                text={syntax}
+                theme={theme}
+              />
+            ))
+          )}
         </div>
       ) : null}
       {example ? (
-        <div key={`div-${randomString()}`}>
-          <p className='example-text'>
-            Example :
-          </p>
-          <CodeHighlighter changeText={changeText} text={example[0]} theme={theme} />
+        <div>
+          <p>Example :</p>
+          {example.map((ex, idx) => (
+            <CodeHighlighter
+              key={idx}
+              changeText={updateEditorText}
+              text={ex}
+              theme={theme}
+            />
+          ))}
         </div>
       ) : null}
     </section>
   );
-}
-function Accordion({ items, changeText, theme }: AccordionProps) {
-  items = items.map((item) => ({ ...item, changeText, theme }));
+};
+const Accordion = ({ items }: AccordionProps) => {
+  const { dispatch, state } = useContext(AppContext);
+
   return (
-    <ReactAccordion items={items} SummaryComponent={SummaryComponent} DetailComponent={DetailComponent} />
+    <ReactAccordion
+      items={items}
+      theme={state.theme}
+      updateEditorText={(text: string) =>
+        dispatch({
+          type: "update_editor_text",
+          text: text,
+        })
+      }
+      SummaryComponent={SummaryComponent}
+      DetailComponent={DetailComponent}
+    />
   );
-}
+};
 
 export default Accordion;

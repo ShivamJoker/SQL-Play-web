@@ -1,17 +1,16 @@
-import { AiOutlineSearch } from 'react-icons/ai';
-import '@styles/Workspace/SearchBox/index.scss';
-import { useContext, useEffect, useState } from 'react';
-import getSQLData from '@utils/getSQLData';
-import sqlSyntaxes from '~types/sqlSyntaxes';
-import Accordian from './Accordian';
-import 'highlight.js/styles/vs.css';
-import { AppContext } from '@contexts/AppContext';
+import { AiOutlineSearch } from "react-icons/ai";
+import "@styles/Workspace/SearchBox/index.scss";
+import { useContext, useEffect, useState } from "react";
+import getSQLData from "@utils/getSQLData";
+import sqlSyntaxes from "~types/sqlSyntaxes";
+import Accordian from "./Accordian";
+import "highlight.js/styles/vs.css";
 
 const SearchBox: React.FC = () => {
   const [searchingTextList, setSearchingTextList] = useState<sqlSyntaxes[]>();
   const [sqlSyntaxData, setSqlSyntaxData] = useState<sqlSyntaxes[]>();
   const [inputText, setInputText] = useState<string>();
-  const { dispatch, state: {theme} } = useContext(AppContext);
+
   useEffect(() => {
     const getSqlRequest = (async () => {
       const data = await getSQLData();
@@ -47,18 +46,12 @@ const SearchBox: React.FC = () => {
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
         />
-        <button tabIndex={-1} className="search_icon">
+        <button className="search_icon">
           <AiOutlineSearch size={24} />
         </button>
       </div>
       <div className="searchbox__container__results">
-        <Accordian
-          theme={theme}
-          changeText={(text) => {
-            dispatch({ type: 'update_editor_text', text });
-          }}
-          items={searchingTextList || []}
-        />
+        <Accordian items={searchingTextList ? searchingTextList : []} />
       </div>
     </div>
   );
