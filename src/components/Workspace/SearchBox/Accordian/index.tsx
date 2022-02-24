@@ -44,7 +44,7 @@ const DetailComponent: React.FC<SubComponentProps> = ({
     <section className="hidden_section">
       {syntax ? (
         <div className="syntax-box" key={id}>
-          <p>Syntax:</p>
+          <p className="syntax-text">Syntax:</p>
           {typeof syntax === "string" ? (
             <CodeHighlighter
               changeText={updateEditorText}
@@ -65,7 +65,7 @@ const DetailComponent: React.FC<SubComponentProps> = ({
       ) : null}
       {example ? (
         <div>
-          <p>Example :</p>
+          <p className="example-text">Example :</p>
           {example.map((ex, idx) => (
             <CodeHighlighter
               key={idx}
