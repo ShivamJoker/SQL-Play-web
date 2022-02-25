@@ -8,6 +8,7 @@ import { AppContext } from '@contexts/AppContext';
 import sqlSyntaxes from '~types/sqlSyntaxes';
 import ControlBox from './ControlBox';
 import ResultsTable from './ResultsTable';
+import { IGlobalState } from '~types/global';
 
 function SQLEditor() {
   const monaco = useMonaco();
@@ -15,6 +16,20 @@ function SQLEditor() {
   const [monacoEditor, setMonacoEditor] = useState<monacoModule.editor.IStandaloneCodeEditor>();
   const [sqlResults, setSQLResults] = useState<QueryExecResult[]>();
   const { state: { editorText, theme }, dispatch } = useContext(AppContext);
+  const [editorTheme, setEditorTheme] = useState<'vs-default' | 'vs-dark'>('vs-default');
+
+
+  useEffect(() => {
+    if(theme === "system"){
+      const matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
+      if(matchMedia.matches){
+        setEditorTheme('vs-dark');
+      } else {
+        setEditorTheme('vs-default');
+      }
+    } else if(theme === "light") setEditorTheme('vs-default');
+    else setEditorTheme('vs-dark')
+  }, [theme])
 
   useEffect(() => {
     getSQLData().then((data) => setSQLData(data));
@@ -96,7 +111,7 @@ function SQLEditor() {
             <Editor
               height="200px"
               language="sql"
-              theme={`${theme === 'dark' ? 'vs-dark' : 'vs-default'}`}
+              theme={editorTheme}
               onMount={onMount}
               options={{
                 minimap: { enabled: false },

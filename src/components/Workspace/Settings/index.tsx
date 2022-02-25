@@ -5,30 +5,20 @@ import '@styles/Workspace/Settings/index.scss';
 
 const Settings: React.FC = () => {
   const { state, dispatch } = useContext(AppContext);
-  const [selectedTheme, setSelectedTheme] = useState<IGlobalState['theme']>(
-    state.theme,
-  );
-
-  const onThemeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedTheme(e.target.value as IGlobalState['theme']);
-  };
-
-  useEffect(() => {
-    if (selectedTheme) {
-      localStorage.setItem('theme', selectedTheme);
-      dispatch({
-        type: 'switch_theme',
-        theme: selectedTheme,
-      });
-    }
-  }, [selectedTheme]);
 
   return (
     <div className="settings-container">
       <div className="theme-box">
         <p className="setting-name">Theme</p>
         <div className="theme-selector">
-          <select value={selectedTheme} onChange={onThemeSelect} id="">
+          <select value={state.theme} onChange={(e) => {
+
+            const newTheme = (e.target.value as IGlobalState['theme']);
+            if(newTheme === "system") {
+              localStorage.removeItem('theme');
+            }
+            dispatch({type: 'switch_theme', theme: newTheme})
+          }} id="">
             <option value="system">System</option>
             <option value="light">Light</option>
             <option value="dark">Dark</option>
