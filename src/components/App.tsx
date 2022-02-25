@@ -3,7 +3,7 @@ import Workspace from './Workspace';
 import '@styles/app.scss';
 import Split from 'react-split';
 import SQLEditor from './Editor';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { AppContext } from '@contexts/AppContext';
 import { IGlobalState } from '~types/global';
 
@@ -12,16 +12,22 @@ const matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
 function App() {
   const { state, dispatch } = useContext(AppContext);
   const hasListener = useRef(false);
-  const [theme, setTheme] = useState<IGlobalState['theme']>();
   const setSystemTheme = (isDark: boolean) => {
     if (isDark) {
-      return setTheme('dark');
+      return dispatch({type: 'switch_app_theme', appTheme: 'dark'});
     }
-    setTheme('light');
+    dispatch({type: 'switch_app_theme', appTheme: 'light'})
   };
 
   // listen to the theme state
   useEffect(() => {
+
+    const themeOnChange = ({ matches } : {matches: boolean}) => {
+      const savedTheme = localStorage.getItem('theme');
+      if(!savedTheme){
+        setSystemTheme(matches)
+      }
+    };
     if (state.theme !== 'system') {
       return;
     }
@@ -31,7 +37,7 @@ function App() {
     // only add listener if it doesn't exist
     if (hasListener.current) return;
     // listen for theme changes
-    matchMedia.addEventListener('change', ({ matches }) => setSystemTheme(matches));
+    matchMedia.addEventListener('change', themeOnChange);
 
     hasListener.current = true;
   }, [state.theme]);
@@ -41,8 +47,7 @@ function App() {
       return;
     }
     localStorage.setItem('theme', state.theme);
-    setSystemTheme(state.theme === "dark")
-    dispatch({type: 'switch_theme', theme: state.theme});
+    setSystemTheme(state.theme === "dark");
 
   }, [state.theme]);
 
@@ -50,7 +55,6 @@ function App() {
   useEffect(() => {
 
     const savedTheme = localStorage.getItem('theme') as IGlobalState['theme'] | null;
-
     if(savedTheme) {
       dispatch({type: 'switch_theme', theme: savedTheme})
     } else {
@@ -60,7 +64,7 @@ function App() {
   }, []);
 
   return (
-    <div className={`app ${theme}`}>
+    <div className={`app ${state.appTheme}`}>
       <SideNav />
       <Split
         sizes={[20, 80]}

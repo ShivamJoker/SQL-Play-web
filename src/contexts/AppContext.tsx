@@ -9,6 +9,7 @@ const initialState: IGlobalState = {
   sidebarPosition: 'left',
   theme: 'system',
   editorText: '',
+  appTheme: 'light',
 };
 
 const reducer = (state: IGlobalState, action: GlobalReducerActions): IGlobalState => {
@@ -20,6 +21,9 @@ const reducer = (state: IGlobalState, action: GlobalReducerActions): IGlobalStat
     }
     case 'switch_theme': {
       return { ...state, theme: action.theme };
+    }
+    case 'switch_app_theme': {
+      return { ...state, appTheme: action.appTheme };
     }
     case 'update_editor_text': {
       return { ...state, editorText: action.text };

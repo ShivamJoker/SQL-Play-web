@@ -85,7 +85,7 @@ const Accordion = ({ items }: AccordionProps) => {
   return (
     <ReactAccordion
       items={items}
-      theme={state.theme}
+      theme={state.appTheme}
       updateEditorText={(text: string) =>
         dispatch({
           type: "update_editor_text",
