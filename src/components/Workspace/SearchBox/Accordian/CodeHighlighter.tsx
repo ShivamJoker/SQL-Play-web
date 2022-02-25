@@ -13,7 +13,7 @@ interface Props {
 }
 function CodeHighlighter({ text, changeText, theme }: Props) {
   return (
-    <div onClick={() => changeText(text)}>
+    <div onClick={() => changeText(text)} className="code-highlighter">
       <SyntaxHighlighter
         style={theme === "light" ? defaultStyle : vs2015}
         language="sql"
