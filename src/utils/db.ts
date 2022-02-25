@@ -27,6 +27,8 @@ const init = async (data?: Uint8Array) => {
   if (existingDatabase) {
     const data = new Uint8Array(existingDatabase as ArrayBufferLike);
     data ? init(data).then(dbInitFunction) : init().then(dbInitFunction);
+  } else {
+    init().then(dbInitFunction);
   }
 })();
 
