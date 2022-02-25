@@ -1,7 +1,10 @@
 const randomString = (size: number = 10) => {
-  const array = new Uint32Array(size);
-  const values = window.crypto.getRandomValues(array);
-  return values.toString();
+  let result = '';
+  for(let i = 0; i < size; i++) {
+    const random = Math.random();
+    result += String.fromCharCode(Math.floor(random * 26) + (random < .5 ? 65 : 97));
+  }
+  return result;
 };
 
 export default randomString;

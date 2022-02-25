@@ -16,7 +16,6 @@ function ResultsTable({ table }: Props) {
         <tr className="headers">
           {table.columns.map((column) => (
             <th
-              id={`result-table-column-${randomString()}`}
               key={`result-table-column-${randomString()}`}
             >
               {column}
@@ -32,7 +31,6 @@ function ResultsTable({ table }: Props) {
             {values.map((val) => (
               <td
                 key={`result-table-td-${randomString()}`}
-                id={`result-table-td-${randomString()}`}
               >
                 {val || <i key={`result-table-td-i-${randomString()}`}>null</i>}
               </td>

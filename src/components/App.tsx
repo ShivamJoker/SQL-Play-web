@@ -59,10 +59,6 @@ function App() {
 
   }, []);
 
-    useEffect(() => {
-      console.log('theme', theme);
-    }, [theme])
-
   return (
     <div className={`app ${theme}`}>
       <SideNav />
