@@ -102,11 +102,6 @@ code {
     margin: 10px 0px;
 }
 
-.syntax-text,
-.example-text {
-    margin-bottom: 5px;
-}
-
 .hljs {
     padding: 0.5em;
 }
@@ -122,4 +117,8 @@ code {
 .example_highlighted {
     background: var(--off-background) !important;
     margin: 10px 0px;
+}
+
+.code-highlighter{
+    margin: 5px 0px;
 }

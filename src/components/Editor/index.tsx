@@ -8,13 +8,14 @@ import { AppContext } from '@contexts/AppContext';
 import sqlSyntaxes from '~types/sqlSyntaxes';
 import ControlBox from './ControlBox';
 import ResultsTable from './ResultsTable';
+import { IGlobalState } from '~types/global';
 
 function SQLEditor() {
   const monaco = useMonaco();
   const [sqlSyntaxes, setSQLData] = useState<sqlSyntaxes[] | undefined>();
   const [monacoEditor, setMonacoEditor] = useState<monacoModule.editor.IStandaloneCodeEditor>();
   const [sqlResults, setSQLResults] = useState<QueryExecResult[]>();
-  const { state: { editorText, theme }, dispatch } = useContext(AppContext);
+  const { state: { editorText, appTheme }, dispatch } = useContext(AppContext);
 
   useEffect(() => {
     getSQLData().then((data) => setSQLData(data));
@@ -96,7 +97,7 @@ function SQLEditor() {
             <Editor
               height="200px"
               language="sql"
-              theme={`${theme === 'dark' ? 'vs-dark' : 'vs-default'}`}
+              theme={appTheme === "light" ? 'vs-default' : 'vs-dark'}
               onMount={onMount}
               options={{
                 minimap: { enabled: false },

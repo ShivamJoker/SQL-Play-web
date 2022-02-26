@@ -2,38 +2,35 @@ import { execCmd, saveDBState } from '@utils/db';
 import { useContext, useEffect, useState } from 'react';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import { QueryExecResult } from 'sql.js';
-import { toast } from 'react-toastify';
+import { toast, ToastOptions } from 'react-toastify';
 import { AppContext } from '@contexts/AppContext';
-
 interface Props {
   editorText: string;
   onResult: (results: QueryExecResult[] | undefined) => void;
 }
 
 function ControlBox({ editorText, onResult }: Props) {
-  // hooks
-  const [commandsHistory, updateCommandsHistory] = useState<string[]>([]);
-  const [commandHistoryIndex, updateCommandHistoryIndex] = useState<number>(0);
-  const { state } = useContext(AppContext);
+  const {state: {theme}} = useContext(AppContext);
+  const [toastTheme, setToastTheme] = useState<ToastOptions['theme']>('light');
 
-  // effects
   useEffect(() => {
-    if (commandsHistory && commandsHistory.length) {
-      updateCommandHistoryIndex(commandsHistory.length);
+    if(theme === "system"){
+      const matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
+      if(matchMedia.matches){
+        setToastTheme('dark');
+      } else {
+        setToastTheme('light');
+      }
+    } else if(theme === "dark"){
+      setToastTheme('dark')
     }
-  }, [commandsHistory]);
+    else {
+      setToastTheme('light')
+    };
 
-  // functions
-
-  const addInHistory = (text: string) => {
-    updateCommandsHistory((prev) => {
-      prev.push(text);
-      return prev;
-    });
-  };
+  }, [theme]);
 
   const onRun = () => {
-    addInHistory(editorText);
     try {
       const results = execCmd(editorText);
       if (results && results.length) {
@@ -47,19 +44,13 @@ function ControlBox({ editorText, onResult }: Props) {
 
       toast(message, {
         type: 'error',
-        theme: 'colored',
-        hideProgressBar: true,
+        theme: toastTheme,
+        hideProgressBar: false,
         position: 'bottom-right',
         pauseOnFocusLoss: false,
         autoClose: 5000,
       });
       onResult(undefined);
-    }
-  };
-
-  const sqlHistory = (step: 'down' | 'up') => {
-    if (step === 'up') {
-      const cmd = commandsHistory[commandsHistory.length - 2];
     }
   };
 

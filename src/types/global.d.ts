@@ -1,6 +1,7 @@
 export interface IGlobalState {
   activeSidebarTab: 'search' | 'settings' | 'premium';
   theme: 'dark' | 'light' | 'system';
+  appTheme: 'dark' | 'light';
   sidebarCollapsed: boolean;
   sidebarPosition: 'left' | 'right';
   editorText: string;
@@ -11,6 +12,10 @@ export type GlobalReducerActions =
       type: 'switch_theme';
       theme: IGlobalState['theme'];
     }
+  | {
+    type: 'switch_app_theme';
+    appTheme: IGlobalState['appTheme'];
+  }
   | {
       type: 'switch_sidebar_tab';
       tab: IGlobalState['activeSidebarTab'];
