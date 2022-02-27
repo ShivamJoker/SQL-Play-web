@@ -43,7 +43,6 @@ function SideNav() {
 
   return (
     <div className="side_nav">
-      <div className="sql-play-title">SQLPlay</div>
       {buttons.map((btn) => (
         <Button
           Icon={btn.icon}

@@ -2,29 +2,22 @@ import SideNav from "./SideNav";
 import Workspace from "./Workspace";
 import "@styles/app.scss";
 import SQLEditor from "./Editor";
-import { useCallback, useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { AppContext } from "@contexts/AppContext";
 import { IGlobalState } from "~types/global";
+import useToggler from "@utils/useThemeFunctions";
+import MobileNavigation from "./MobileNavigation";
 
-const matchMedia = window.matchMedia("(prefers-color-scheme: dark)");
+const themeMedia = window.matchMedia("(prefers-color-scheme: dark)");
+const sizeMedia = window.matchMedia("(max-width: 512px)");
 
 const savedTheme = localStorage.getItem("theme") as IGlobalState["theme"];
 
 function App() {
   const { state, dispatch } = useContext(AppContext);
   const hasListener = useRef(false);
-
-  const toggleDarkTheme = (isDark: boolean) => {
-    if (isDark) {
-      dispatch({ type: "switch_app_theme", appTheme: "dark" });
-      return;
-    }
-    dispatch({ type: "switch_app_theme", appTheme: "light" });
-  };
-
-  const onThemeChange = useCallback(({ matches }: { matches: boolean }) => {
-    toggleDarkTheme(matches);
-  }, []);
+  const [isMobile, setIsMobile] = useState<boolean>(sizeMedia.matches);
+  const {toggleDarkTheme, onThemeChange, themeStateUpdate} = useToggler();
 
   // listen to the theme state
   useEffect(() => {
@@ -35,7 +28,7 @@ function App() {
     if (state.theme !== "system") {
       toggleDarkTheme(state.theme === "dark");
       if (!hasListener.current) return;
-      matchMedia.removeEventListener("change", onThemeChange);
+      themeMedia.removeEventListener("change", onThemeChange);
       // console.log("removed theme change listener");
 
       hasListener.current = false;
@@ -43,12 +36,12 @@ function App() {
     }
 
     // toggle theme to match current system theme
-    toggleDarkTheme(matchMedia.matches);
+    toggleDarkTheme(themeMedia.matches);
 
     // only add listener if it doesn't exist
     if (hasListener.current) return;
     // listen for theme changes
-    matchMedia.addEventListener("change", onThemeChange);
+    themeMedia.addEventListener("change", onThemeChange);
     hasListener.current = true;
     // console.log("added theme change listener");
   }, [state.theme]);
@@ -59,22 +52,21 @@ function App() {
       return;
     }
 
-    toggleDarkTheme(matchMedia.matches);
+    toggleDarkTheme(themeMedia.matches);
   }, []);
 
+  useEffect(themeStateUpdate, [state.appTheme])
+
+
   useEffect(() => {
-    if(document.body.classList.contains('light')){
-      document.body.classList.remove('light')
-      document.body.classList.add('dark');
-    } else {
-      document.body.classList.remove('dark')
-      document.body.classList.add('light');
-    }
-  }, [state.appTheme])
+    sizeMedia.addEventListener('change', ({matches}) => {
+      setIsMobile(matches)
+    });
+  }, [])
 
   return (
     <div className={`app`}>
-      <SideNav />
+      {!isMobile ? <SideNav /> : <MobileNavigation />}
       <div className="app-container">
         <Workspace />
         <SQLEditor />

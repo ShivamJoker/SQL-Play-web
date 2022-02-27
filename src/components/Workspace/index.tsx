@@ -1,6 +1,6 @@
 import { AppContext } from '@contexts/AppContext';
 import '@styles/Workspace/index.scss';
-import { ComponentType, lazy, MutableRefObject, useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { MutableRefObject, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import Premium from './Premium';
 import SearchBox from './SearchBox';
 import Settings from './Settings';
