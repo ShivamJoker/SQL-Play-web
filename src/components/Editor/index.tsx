@@ -88,46 +88,42 @@ function SQLEditor() {
   };
 
   return (
-    <div>
-      {' '}
-      {/* empty div for react-split.js */}
-      <div className="sql_playground">
-        <div className="code_container">
-          <div className="code_container__textarea">
-            <Editor
-              height="200px"
-              language="sql"
-              theme={appTheme === "light" ? 'vs-default' : 'vs-dark'}
-              onMount={onMount}
-              options={{
-                minimap: { enabled: false },
-                overviewRulerLanes: 0,
-                hideCursorInOverviewRuler: true,
-                overviewRulerBorder: false,
-                scrollbar: {
-                  vertical: 'auto',
-                  horizontal: 'auto',
-                  verticalScrollbarSize: 0,
-                  horizontalScrollbarSize: 4,
-                },
-                lineNumbers: 'off',
-                glyphMargin: false,
-                folding: false,
-                lineDecorationsWidth: 0,
-                lineNumbersMinChars: 0,
-                autoIndent: 'full',
-                renderLineHighlight: 'none',
-                fontSize: 16,
-              }}
-              value={editorText}
-              onChange={editorOnChange}
-            />
-          </div>
-          <ControlBox editorText={editorText} onResult={setSQLResults} />
+    <div className="sql_playground">
+      <div className="code_container">
+        <div className="code_container__textarea">
+          <Editor
+            height="200px"
+            language="sql"
+            theme={appTheme === "light" ? 'vs-default' : 'vs-dark'}
+            onMount={onMount}
+            options={{
+              minimap: { enabled: false },
+              overviewRulerLanes: 0,
+              hideCursorInOverviewRuler: true,
+              overviewRulerBorder: false,
+              scrollbar: {
+                vertical: 'auto',
+                horizontal: 'auto',
+                verticalScrollbarSize: 0,
+                horizontalScrollbarSize: 4,
+              },
+              lineNumbers: 'off',
+              glyphMargin: false,
+              folding: false,
+              lineDecorationsWidth: 0,
+              lineNumbersMinChars: 0,
+              autoIndent: 'full',
+              renderLineHighlight: 'none',
+              fontSize: 16,
+            }}
+            value={editorText}
+            onChange={editorOnChange}
+          />
         </div>
-        <div className="sql_result_container">
-          <ResultsTable table={sqlResults ? sqlResults[0] : undefined} />
-        </div>
+        <ControlBox editorText={editorText} onResult={setSQLResults} />
+      </div>
+      <div className="sql_result_container">
+        <ResultsTable table={sqlResults ? sqlResults[0] : undefined} />
       </div>
     </div>
   );

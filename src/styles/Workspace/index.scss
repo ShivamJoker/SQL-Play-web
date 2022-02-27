@@ -1,13 +1,9 @@
 .workspace_container {
   background: var(--bg-alt);
   height: 100vh;
-  width: 25vw;
+  width: 25%;
+  min-width: 250px;
 }
-.split-container{
-  display: flex;
-  width: 100%;
-}
-
 .wrapper{
   width: 100%;
   height: 100vh;

@@ -1,3 +1,6 @@
+.sql_playground {
+  width: 75%;
+}
 .code_container{
   position: relative;
   width: 100%;
@@ -48,7 +51,6 @@
 }
 .sql_result_container{
   overflow: auto;
-  width: inherit;
   margin: 10px;
 }
 

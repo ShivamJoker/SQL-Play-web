@@ -16,17 +16,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-.gutter {
-  background-color: var(--off-background);
-  cursor: ew-resize;
-  background-repeat: no-repeat;
-  background-position: 50%;
-}
-
-.gutter.gutter-horizontal {
-  background-image: grey;
-  cursor: col-resize;
-  width: 10px;
-  height: 100vh;
-}

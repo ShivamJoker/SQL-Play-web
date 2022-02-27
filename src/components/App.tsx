@@ -1,7 +1,6 @@
 import SideNav from "./SideNav";
 import Workspace from "./Workspace";
 import "@styles/app.scss";
-import Split from "react-split";
 import SQLEditor from "./Editor";
 import { useCallback, useContext, useEffect, useRef } from "react";
 import { AppContext } from "@contexts/AppContext";
@@ -66,18 +65,10 @@ function App() {
   return (
     <div className={`app ${state.appTheme}`}>
       <SideNav />
-      <Split
-        sizes={[20, 80]}
-        maxSize={[600, Infinity]}
-        minSize={[400, 0]}
-        gutterSize={10}
-        gutterAlign="center"
-        direction="horizontal"
-        className="split-container"
-      >
+      <div className="app-container">
         <Workspace />
         <SQLEditor />
-      </Split>
+      </div>
     </div>
   );
 }
