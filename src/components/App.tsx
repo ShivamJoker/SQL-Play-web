@@ -62,8 +62,18 @@ function App() {
     toggleDarkTheme(matchMedia.matches);
   }, []);
 
+  useEffect(() => {
+    if(document.body.classList.contains('light')){
+      document.body.classList.remove('light')
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark')
+      document.body.classList.add('light');
+    }
+  }, [state.appTheme])
+
   return (
-    <div className={`app ${state.appTheme}`}>
+    <div className={`app`}>
       <SideNav />
       <div className="app-container">
         <Workspace />

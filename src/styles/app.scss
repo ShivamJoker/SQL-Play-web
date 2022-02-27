@@ -6,7 +6,7 @@
   background: var(--bg);
   color: var(--bg-reverse);
 }
-.app.light {
+body.light {
   --primary: #fdd835;
   --primary-alt: #a57c00;
   --bg: #fff;
@@ -20,7 +20,7 @@
   --border-nav-icons: #212121;
 }
 
-.app.dark {
+body.dark {
   --primary: #fdd835;
   --primary-alt: #a57c00;
   --bg: #1e1e1e;
@@ -37,4 +37,10 @@
 .app-container {
   width: calc(100vw - 50px);
   display: flex;
+}
+
+@media screen and (max-width: 512px) {
+  .app-container {
+    width: 100%;
+  }
 }

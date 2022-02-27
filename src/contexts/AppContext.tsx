@@ -4,7 +4,7 @@ import {
 import { GlobalReducerActions, IGlobalState } from '~types/global';
 
 const initialState: IGlobalState = {
-  activeSidebarTab: 'search',
+  activeSidebarTab: null,
   sidebarCollapsed: false,
   sidebarPosition: 'left',
   theme: 'system',

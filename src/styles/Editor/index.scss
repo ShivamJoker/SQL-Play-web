@@ -57,3 +57,10 @@
 .monaco-editor .scroll-decoration {
   display: none !important;
 }
+
+@media screen and (max-width: 512px) {
+  .sql_playground{
+    width: 100%;
+    margin-top: 50px;
+  }
+}

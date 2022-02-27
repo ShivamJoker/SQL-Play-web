@@ -23,10 +23,12 @@ function SideNav() {
     {
       title: 'search',
       icon: AiOutlineSearch,
+      className: 'search-btn',
     },
     {
       title: 'settings',
       icon: AiOutlineSetting,
+      className: 'settings-btn'
     },
     // {
     //   title: 'premium',
@@ -36,17 +38,18 @@ function SideNav() {
 
   const buttonPress = (btnKey: IGlobalState['activeSidebarTab']) => {
     setActiveTab(btnKey);
-
     // code for events like changing workspace's screen will be here.
   };
 
   return (
     <div className="side_nav">
+      <div className="sql-play-title">SQLPlay</div>
       {buttons.map((btn) => (
         <Button
           Icon={btn.icon}
           active={btn.title === activeSidebarTab}
           key={btn.title}
+          className={btn.className}
           onClick={() => buttonPress(btn.title)}
         />
       ))}

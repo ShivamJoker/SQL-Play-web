@@ -1,6 +1,6 @@
 import { AiOutlineSearch } from "react-icons/ai";
 import "@styles/Workspace/SearchBox/index.scss";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import getSQLData from "@utils/getSQLData";
 import sqlSyntaxes from "~types/sqlSyntaxes";
 import Accordian from "./Accordian";
