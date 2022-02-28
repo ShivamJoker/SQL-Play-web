@@ -10,7 +10,7 @@ const initialState: IGlobalState = {
   theme: 'system',
   editorText: '',
   appTheme: 'light',
-  isMobile: false,
+  isMobileSearchOpen: false,
 };
 
 const reducer = (state: IGlobalState, action: GlobalReducerActions): IGlobalState => {
@@ -29,8 +29,8 @@ const reducer = (state: IGlobalState, action: GlobalReducerActions): IGlobalStat
     case 'update_editor_text': {
       return { ...state, editorText: action.text };
     }
-    case 'change_device_type': {
-      return { ...state, isMobile: action.deviceIsMobile };
+    case 'update_mobile_search_state': {
+      return { ...state, isMobileSearchOpen: action.mobileSearchOpen };
     }
     default:
       return state;

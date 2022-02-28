@@ -5,7 +5,7 @@ export interface IGlobalState {
   sidebarCollapsed: boolean;
   sidebarPosition: 'left' | 'right';
   editorText: string;
-  isMobile: boolean
+  isMobileSearchOpen: boolean,
 }
 
 export type GlobalReducerActions =
@@ -30,6 +30,6 @@ export type GlobalReducerActions =
       text: IGlobalState['editorText'];
     }
   | {
-    type: 'change_device_type';
-    deviceIsMobile: IGlobalState['isMobile'];
+    type: 'update_mobile_search_state';
+    mobileSearchOpen: IGlobalState['isMobileSearchOpen'];
   };
