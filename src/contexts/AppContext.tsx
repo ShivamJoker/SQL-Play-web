@@ -4,12 +4,13 @@ import {
 import { GlobalReducerActions, IGlobalState } from '~types/global';
 
 const initialState: IGlobalState = {
-  activeSidebarTab: null,
+  activeSidebarTab: 'search',
   sidebarCollapsed: false,
   sidebarPosition: 'left',
   theme: 'system',
   editorText: '',
   appTheme: 'light',
+  isMobile: false,
 };
 
 const reducer = (state: IGlobalState, action: GlobalReducerActions): IGlobalState => {
@@ -27,6 +28,9 @@ const reducer = (state: IGlobalState, action: GlobalReducerActions): IGlobalStat
     }
     case 'update_editor_text': {
       return { ...state, editorText: action.text };
+    }
+    case 'change_device_type': {
+      return { ...state, isMobile: action.deviceIsMobile };
     }
     default:
       return state;

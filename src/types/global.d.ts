@@ -1,10 +1,11 @@
 export interface IGlobalState {
-  activeSidebarTab: 'search' | 'settings' | 'premium' | null;
+  activeSidebarTab: 'search' | 'settings' | 'premium';
   theme: 'dark' | 'light' | 'system';
   appTheme: 'dark' | 'light';
   sidebarCollapsed: boolean;
   sidebarPosition: 'left' | 'right';
   editorText: string;
+  isMobile: boolean
 }
 
 export type GlobalReducerActions =
@@ -27,4 +28,8 @@ export type GlobalReducerActions =
   | {
       type: 'update_editor_text';
       text: IGlobalState['editorText'];
-    };
+    }
+  | {
+    type: 'change_device_type';
+    deviceIsMobile: IGlobalState['isMobile'];
+  };

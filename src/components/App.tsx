@@ -2,11 +2,12 @@ import SideNav from "./SideNav";
 import Workspace from "./Workspace";
 import "@styles/app.scss";
 import SQLEditor from "./Editor";
-import { useContext, useEffect, useRef, useState } from "react";
+import React, { Suspense, useContext, useEffect, useRef, useState } from "react";
 import { AppContext } from "@contexts/AppContext";
 import { IGlobalState } from "~types/global";
 import useToggler from "@utils/useThemeFunctions";
-import MobileNavigation from "./MobileNavigation";
+
+const MobileNavigation = React.lazy(() => import("./MobileNavigation"));
 
 const themeMedia = window.matchMedia("(prefers-color-scheme: dark)");
 const sizeMedia = window.matchMedia("(max-width: 512px)");
@@ -66,7 +67,7 @@ function App() {
 
   return (
     <div className={`app`}>
-      {!isMobile ? <SideNav /> : <MobileNavigation />}
+      {!isMobile ? <SideNav /> : <Suspense fallback={<p>Loading....</p>}><MobileNavigation /></Suspense>}
       <div className="app-container">
         <Workspace />
         <SQLEditor />
