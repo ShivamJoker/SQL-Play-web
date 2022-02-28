@@ -26,7 +26,7 @@ const MobileNavigationComponent = () => {
           <AiOutlineSearch />
         </button>
       </div>
-      <BottomSheet open={isMobileSearchOpen} ref={sheetRef} className="bottom-sheet-container">
+      <BottomSheet open={isMobileSearchOpen} ref={sheetRef} className="bottom-sheet-container" snapPoints={({maxHeight}) => [maxHeight * 0.8, maxHeight]}>
         <div className='close-box'>
           <button className='close-btn' onClick={onSearchClose}>
             <AiOutlineClose />

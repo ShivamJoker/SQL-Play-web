@@ -37,11 +37,13 @@ body.dark {
 .app-container {
   width: calc(100vw - 50px);
   display: flex;
+  background: var(--bg);
 }
 
 @media screen and (max-width: 512px) {
   .app-container {
     width: 100%;
+    height: calc(100vh - 50px);
   }
   .app {
     display: unset;
