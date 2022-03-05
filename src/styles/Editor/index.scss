@@ -1,5 +1,5 @@
 .sql_playground {
-  width: 75%;
+  width: 100%;
 }
 .code_container{
   position: relative;
@@ -10,6 +10,7 @@
     margin: 10px;
     padding: 10px;
     padding-bottom: 2px;
+    width: 100%;
   }
   &__control_box{
     position: absolute;
@@ -58,9 +59,8 @@
   display: none !important;
 }
 
-@media screen and (max-width: 512px) {
+@media screen and (max-width: 720px) {
   .sql_playground{
-    width: 100%;
     margin-top: 50px;
   }
 }

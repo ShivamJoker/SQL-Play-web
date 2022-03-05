@@ -9,7 +9,7 @@ import useToggler from "@utils/useThemeFunctions";
 import MobileNavigation from "./MobileNavigation";
 
 const themeMedia = window.matchMedia("(prefers-color-scheme: dark)");
-const sizeMedia = window.matchMedia("(max-width: 512px)");
+const sizeMedia = window.matchMedia("(max-width: 720px)");
 
 const savedTheme = localStorage.getItem("theme") as IGlobalState["theme"];
 

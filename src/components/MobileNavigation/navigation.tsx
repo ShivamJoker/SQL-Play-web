@@ -1,4 +1,4 @@
-import { AiOutlineClose, AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineSearch } from 'react-icons/ai';
 import '@styles/MobileNavigation/index.scss';
 import { MutableRefObject, useContext, useRef } from 'react';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
@@ -26,13 +26,8 @@ const MobileNavigationComponent = () => {
           <AiOutlineSearch />
         </button>
       </div>
-      <BottomSheet open={isMobileSearchOpen} ref={sheetRef} className="bottom-sheet-container" snapPoints={({maxHeight}) => [maxHeight * 0.8, maxHeight]}>
-        <div className='close-box'>
-          <button className='close-btn' onClick={onSearchClose}>
-            <AiOutlineClose />
-          </button>
-        </div>
-        <SearchBox />
+      <BottomSheet open={isMobileSearchOpen} onDismiss={onSearchClose} ref={sheetRef} className="bottom-sheet-container" snapPoints={({maxHeight}) => [maxHeight * 0.8, maxHeight]}>
+          <SearchBox />
       </BottomSheet>
     </>
   )

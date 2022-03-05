@@ -2,7 +2,8 @@
   background: var(--bg-alt);
   height: 100vh;
   width: 25%;
-  min-width: 250px;
+  min-width: 360px;
+  max-width: 500px;
 }
 .wrapper{
   width: 100%;
@@ -28,7 +29,7 @@
   --rsbs-bg: var(--off-background);
 }
 
-@media screen and (max-width: 512px) {
+@media screen and (max-width: 720px) {
   .workspace_container{
     display: none;
   }

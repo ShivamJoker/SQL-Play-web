@@ -8,7 +8,6 @@ import { AppContext } from '@contexts/AppContext';
 import sqlSyntaxes from '~types/sqlSyntaxes';
 import ControlBox from './ControlBox';
 import ResultsTable from './ResultsTable';
-import { IGlobalState } from '~types/global';
 
 function SQLEditor() {
   const monaco = useMonaco();
@@ -92,6 +91,7 @@ function SQLEditor() {
       <div className="code_container">
         <div className="code_container__textarea">
           <Editor
+            width={'40vw'}
             height="200px"
             language="sql"
             theme={appTheme === "light" ? 'vs-default' : 'vs-dark'}
@@ -115,6 +115,7 @@ function SQLEditor() {
               autoIndent: 'full',
               renderLineHighlight: 'none',
               fontSize: 16,
+              automaticLayout: true,
             }}
             value={editorText}
             onChange={editorOnChange}

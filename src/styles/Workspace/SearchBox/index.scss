@@ -122,3 +122,17 @@ code {
     margin: 5px 0px;
     cursor: pointer;
 }
+
+// styles when bottom sheet is activated
+@media screen and (max-width: 720px) {
+    .searchbox__container{
+        height: calc(var(--rsbs-overlay-h) - 20px);
+        min-height: 10px;
+        .acc-item:last-child {
+            margin-bottom: 20px;
+        }
+        &__results{
+            height: calc(100% - 50px);
+        }
+    }
+}
