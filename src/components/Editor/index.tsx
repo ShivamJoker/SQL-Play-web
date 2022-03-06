@@ -15,7 +15,6 @@ function SQLEditor() {
   const [monacoEditor, setMonacoEditor] = useState<monacoModule.editor.IStandaloneCodeEditor>();
   const [sqlResults, setSQLResults] = useState<QueryExecResult[]>();
   const { state: { editorText, appTheme }, dispatch } = useContext(AppContext);
-
   useEffect(() => {
     getSQLData().then((data) => setSQLData(data));
   }, []);

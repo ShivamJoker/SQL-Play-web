@@ -33,6 +33,7 @@ body.dark {
 
 .app-container{
   display: flex;
+  width: calc(100vw - 50px);
 }
 
 @media screen and (max-width: 720px) {
