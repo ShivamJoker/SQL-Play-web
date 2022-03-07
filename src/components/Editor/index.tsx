@@ -1,20 +1,24 @@
-import Editor, { OnChange, OnMount, useMonaco } from '@monaco-editor/react';
-import '@styles/Editor/index.scss';
-import { useContext, useEffect, useState } from 'react';
-import * as monacoModule from 'monaco-editor';
-import getSQLData from '@utils/getSQLData';
-import { QueryExecResult } from 'sql.js';
-import { AppContext } from '@contexts/AppContext';
-import sqlSyntaxes from '~types/sqlSyntaxes';
-import ControlBox from './ControlBox';
-import ResultsTable from './ResultsTable';
+import Editor, { OnChange, OnMount, useMonaco } from "@monaco-editor/react";
+import "@styles/Editor/index.scss";
+import { useContext, useEffect, useState } from "react";
+import * as monacoModule from "monaco-editor";
+import getSQLData from "@utils/getSQLData";
+import { QueryExecResult } from "sql.js";
+import { AppContext } from "@contexts/AppContext";
+import sqlSyntaxes from "~types/sqlSyntaxes";
+import ControlBox from "./ControlBox";
+import ResultsTable from "./ResultsTable";
 
 function SQLEditor() {
   const monaco = useMonaco();
   const [sqlSyntaxes, setSQLData] = useState<sqlSyntaxes[] | undefined>();
-  const [monacoEditor, setMonacoEditor] = useState<monacoModule.editor.IStandaloneCodeEditor>();
+  const [monacoEditor, setMonacoEditor] =
+    useState<monacoModule.editor.IStandaloneCodeEditor>();
   const [sqlResults, setSQLResults] = useState<QueryExecResult[]>();
-  const { state: { editorText, appTheme }, dispatch } = useContext(AppContext);
+  const {
+    state: { editorText, appTheme },
+    dispatch,
+  } = useContext(AppContext);
   useEffect(() => {
     getSQLData().then((data) => setSQLData(data));
   }, []);
@@ -23,9 +27,7 @@ function SQLEditor() {
     if (!monaco?.languages) return;
 
     const createDependencyProposals = (
-
-      range: monacoModule.IRange,
-
+      range: monacoModule.IRange
     ): monacoModule.languages.CompletionItem[] => {
       if (sqlSyntaxes) {
         return sqlSyntaxes.map((item) => ({
@@ -35,13 +37,13 @@ function SQLEditor() {
           range,
           kind: monaco.languages.CompletionItemKind.Function,
           insertTextRules:
-               monaco?.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+            monaco?.languages.CompletionItemInsertTextRule.InsertAsSnippet,
         }));
       }
       return [];
     };
     if (sqlSyntaxes) {
-      monaco.languages.registerCompletionItemProvider('sql', {
+      monaco.languages.registerCompletionItemProvider("sql", {
         provideCompletionItems: (model, position) => {
           const word = model.getWordUntilPosition(position);
 
@@ -62,16 +64,21 @@ function SQLEditor() {
 
   useEffect(() => {
     if (monaco?.languages && monacoEditor) {
-      monacoEditor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
-        const runSQLButton = document.querySelector<HTMLButtonElement>('button#run-sql-button');
+      monacoEditor.addCommand(
+        monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter,
+        () => {
+          const runSQLButton = document.querySelector<HTMLButtonElement>(
+            "button#run-sql-button"
+          );
 
-        runSQLButton?.classList.add('focusing');
-        runSQLButton?.click();
+          runSQLButton?.classList.add("focusing");
+          runSQLButton?.click();
 
-        setTimeout(() => runSQLButton?.classList.remove('focusing'), 50);
+          setTimeout(() => runSQLButton?.classList.remove("focusing"), 50);
 
-        monacoEditor.focus();
-      });
+          monacoEditor.focus();
+        }
+      );
     }
   }, [monaco, monacoEditor]);
 
@@ -79,10 +86,10 @@ function SQLEditor() {
 
   const onMount: OnMount = (editor) => {
     setMonacoEditor(editor);
-    dispatch({ type: 'update_editor_text', text: 'SELECT * FROM employees;' });
+    dispatch({ type: "update_editor_text", text: "SELECT * FROM employees;" });
   };
   const editorOnChange: OnChange = (text) => {
-    dispatch({ type: 'update_editor_text', text: text ? text.trim() : '' });
+    dispatch({ type: "update_editor_text", text: text ? text.trim() : "" });
   };
 
   return (
@@ -90,10 +97,9 @@ function SQLEditor() {
       <div className="code_container">
         <div className="code_container__textarea">
           <Editor
-            width={'40vw'}
             height="200px"
             language="sql"
-            theme={appTheme === "light" ? 'vs-default' : 'vs-dark'}
+            theme={appTheme === "light" ? "vs-default" : "vs-dark"}
             onMount={onMount}
             options={{
               minimap: { enabled: false },
@@ -101,18 +107,18 @@ function SQLEditor() {
               hideCursorInOverviewRuler: true,
               overviewRulerBorder: false,
               scrollbar: {
-                vertical: 'auto',
-                horizontal: 'auto',
+                vertical: "auto",
+                horizontal: "auto",
                 verticalScrollbarSize: 0,
                 horizontalScrollbarSize: 4,
               },
-              lineNumbers: 'off',
+              lineNumbers: "off",
               glyphMargin: false,
               folding: false,
               lineDecorationsWidth: 0,
               lineNumbersMinChars: 0,
-              autoIndent: 'full',
-              renderLineHighlight: 'none',
+              autoIndent: "full",
+              renderLineHighlight: "none",
               fontSize: 16,
               automaticLayout: true,
             }}
