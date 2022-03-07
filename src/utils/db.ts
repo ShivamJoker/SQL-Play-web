@@ -1,23 +1,34 @@
-import { get, set } from 'idb-keyval';
-import sqlJS, { Database } from 'sql.js';
+import { get, set } from "idb-keyval";
+import sqlJS, { Database } from "sql.js";
+
+import wasmBinding from "sql.js/dist/sql-wasm.wasm?url";
 
 let db: Database;
 
 const init = async (data?: Uint8Array) => {
-  const sqlPromise = sqlJS({ locateFile: (file) => `https://sql.js.org/dist/${file}` });
-  if (!data) {
-    const dataPromise = fetch(import.meta.env.VITE_APP_DB_FILE).then((res) => res.arrayBuffer());
+  const sqlPromise = sqlJS({
+    locateFile: (file) => wasmBinding,
+  });
 
-    const [SQL, buf] = await Promise.all([sqlPromise, dataPromise]);
-    db = new SQL.Database(new Uint8Array(buf));
-  } else {
-    const SQL = await sqlPromise;
-    db = new SQL.Database(data);
+  try {
+    if (!data) {
+      const dataPromise = fetch(import.meta.env.VITE_APP_DB_FILE).then((res) =>
+        res.arrayBuffer()
+      );
+
+      const [SQL, buf] = await Promise.all([sqlPromise, dataPromise]);
+      db = new SQL.Database(new Uint8Array(buf));
+    } else {
+      const SQL = await sqlPromise;
+      db = new SQL.Database(data);
+    }
+  } catch (error) {
+    console.log("error in initializing db", error);
   }
 };
 
 (async () => {
-  const existingDBBlob: Blob | undefined = await get('database');
+  const existingDBBlob: Blob | undefined = await get("database");
   const existingDatabase = await existingDBBlob?.arrayBuffer();
 
   const dbInitFunction = (db: void) => {
@@ -32,10 +43,10 @@ const init = async (data?: Uint8Array) => {
   }
 })();
 
-export const execCmd = (text:string) => (db ? db.exec(text) : undefined);
+export const execCmd = (text: string) => (db ? db.exec(text) : undefined);
 
 export const saveDBState = () => {
   const database = db.export();
   const blob = new Blob([database]);
-  set('database', blob);
+  set("database", blob);
 };
