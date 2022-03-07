@@ -1,48 +1,46 @@
 .sql_playground {
-  width: inherit;
+  width: calc(100% - 360px);
 }
-.code_container{
+.code_container {
   position: relative;
   width: 100%;
   padding: 10px;
-  &__textarea{
+  &__textarea {
     border: 2px solid var(--border-editor);
     border-radius: 5px;
     padding-bottom: 2px;
     width: 100%;
     padding: 10px;
   }
-  &__control_box{
+  &__control_box {
     position: absolute;
     bottom: 20px;
     right: 20px;
-    height: 40px;
     display: flex;
     gap: 10px;
     justify-content: center;
     align-items: center;
     &__button {
       padding: 5px 10px;
-      background: transparent;
       outline: none;
-      border:none;
+      border: none;
       display: flex;
       align-items: center;
       cursor: pointer;
-      &:last-child{
-        border: 2px solid var(--border-run);
+      &:last-child {
+        background: var(--border-run);
         border-radius: 5px;
-        padding: 5px;
-        color: var(--border-run);
+        color: var(--bg-reverse-alt);
         gap: 5px;
         font-size: 16px;
         svg {
-          fill: var(--border-run)
+          fill: var(--bg-reverse-alt);
         }
-        &.focusing, &:active {
+        &.focusing,
+        &:active {
           color: var(--bg);
           background: var(--bg-reverse);
-          svg{
+          svg {
             fill: var(--bg);
           }
         }
@@ -50,7 +48,7 @@
     }
   }
 }
-.sql_result_container{
+.sql_result_container {
   overflow: auto;
   margin: 10px;
 }
@@ -60,7 +58,8 @@
 }
 
 @media screen and (max-width: 720px) {
-  .sql_playground{
+  .sql_playground {
     margin-top: 50px;
+    width: 100%;
   }
 }

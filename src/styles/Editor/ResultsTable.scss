@@ -2,21 +2,22 @@ table {
   border-collapse: collapse;
   table-layout: fixed;
   tr.headers {
-    background: rgb(255, 217, 0);
-    th{
+    background: var(--border-table-cell);
+    th {
       color: #000;
     }
   }
-  th, td {
+  th,
+  td {
     white-space: nowrap;
     word-wrap: break-word;
     overflow: hidden !important;
     text-overflow: ellipsis;
     padding: 10px;
-    border: 2px solid var(--primary);
+    border: 2px solid var(--border-table-cell);
     max-width: 160px;
   }
-  td{
+  td {
     color: var(--bg-reverse);
   }
 }

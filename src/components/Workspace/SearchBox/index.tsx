@@ -23,7 +23,7 @@ const SearchBox: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (!inputText || inputText === '') {
+    if (!inputText || inputText === "") {
       setSearchingTextList(sqlSyntaxData);
       return;
     }
@@ -46,9 +46,7 @@ const SearchBox: React.FC = () => {
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
         />
-        <button className="search_icon">
-          <AiOutlineSearch size={24} />
-        </button>
+        <AiOutlineSearch className="search_icon" size={24} />
       </div>
       <div className="searchbox__container__results">
         <Accordian items={searchingTextList ? searchingTextList : []} />

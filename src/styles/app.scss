@@ -7,12 +7,13 @@ body.light {
   --primary: #fdd835;
   --primary-alt: #a57c00;
   --bg: #fff;
+  --bg-surface: #fff;
   --bg-alt: #f2f2f2;
   --off-background: #eee;
   --bg-reverse: #000;
   --bg-reverse-alt: #212121;
-  --border-editor: #21212150;
-  --border-run: #555;
+  --border-editor: #cdcdcd;
+  --border-run: #cdcdcd59;
   --border-table-cell: #fdd835;
   --border-nav-icons: #212121;
 }
@@ -21,17 +22,18 @@ body.dark {
   --primary: #fdd835;
   --primary-alt: #a57c00;
   --bg: #1e1e1e;
-  --bg-alt: #222;
+  --bg-surface: #252525;
+  --bg-alt: #2d2d2d;
   --off-background: #444;
   --bg-reverse: #fff;
   --bg-reverse-alt: #eee;
   --border-editor: #eeeeee50;
-  --border-run: #eee;
-  --border-table-cell: #fdd835;
+  --border-run: #454545;
+  --border-table-cell: #fdd835de;
   --border-nav-icons: #212121;
 }
 
-.app-container{
+.app-container {
   display: flex;
   width: calc(100vw - 50px);
 }
