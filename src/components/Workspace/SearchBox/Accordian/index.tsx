@@ -80,17 +80,21 @@ const DetailComponent: React.FC<SubComponentProps> = ({
   );
 };
 const Accordion = ({ items }: AccordionProps) => {
-  const { dispatch, state } = useContext(AppContext);
+  const { dispatch, state: {appTheme, isMobileSearchOpen} } = useContext(AppContext);
 
   return (
     <ReactAccordion
       items={items}
-      theme={state.appTheme}
-      updateEditorText={(text: string) =>
+      theme={appTheme}
+      updateEditorText={(text: string) => {
+        if(isMobileSearchOpen){
+          dispatch({type: 'update_mobile_search_state', mobileSearchOpen: false});
+        }
         dispatch({
           type: "update_editor_text",
           text: text,
         })
+      }
       }
       SummaryComponent={SummaryComponent}
       DetailComponent={DetailComponent}

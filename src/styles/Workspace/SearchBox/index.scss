@@ -1,124 +1,127 @@
 .searchbox__container {
-    padding: 12px 7px;
-    margin-right: -10px;
-    &__results {
-        height: calc(100vh - 75px);
-        overflow: auto;
-        padding: 0px 5px;
-        &::-webkit-scrollbar {
-            width: 0px;
-        }
+  overflow-y: scroll;
+  max-height: 100vh;
+  &__results {
+    margin: 0px 8px;
+    &::-webkit-scrollbar {
+      width: 0px;
     }
-    &__input_box {
-        position: relative;
-        display: flex;
-        align-items: center;
-        padding-bottom: 10px;
-        &__input {
-            width: 100%;
-            height: 40px;
-            border-radius: 10px;
-            border: none;
-            padding: 5px 10px;
-            outline: none;
-            background: var(--bg);
-            color: var(--bg-reverse);
-            font-size: 18px;
-            &::placeholder {
-                color: var(--bg-reverse);
-            }
-            &::-webkit-search-cancel-button,
-            &::-webkit-search-decoration,
-            &::-webkit-search-results-button,
-            &::-webkit-search-results-decoration {
-                display: none;
-            }
-        }
-        .search_icon {
-            position: absolute;
-            top: 0px;
-            right: 0px;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: none;
-            outline: none;
-            border: none;
-            cursor: pointer;
-            svg {
-                color: var(--bg-reverse);
-            }
-        }
-    }
-    .acc-item {
-        background: var(--bg);
-        padding: 10px;
-        border-radius: 10px;
+  }
+  &__input_box {
+    position: sticky;
+    background: var(--bg-alt);
+    top: 0px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    &__input {
+      width: 100%;
+      height: 40px;
+      border-radius: 10px;
+      border: none;
+      padding: 5px 10px;
+      outline: none;
+      background: var(--bg-surface);
+      color: var(--bg-reverse);
+      font-size: 18px;
+      &::placeholder {
         color: var(--bg-reverse);
-        margin: 10px 0px;
-        .title_and_description {
-            position: relative;
-            cursor: pointer;
-            .list_heading {
-                font-weight: 500;
-            }
-            .list_description {
-                width: 80%;
-                margin-top: 10px;
-            }
-        }
-        .arrow-up-down-box {
-            position: absolute;
-            top: 0px;
-            right: 0px;
-            width: 10%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+      }
+      &::-webkit-search-cancel-button,
+      &::-webkit-search-decoration,
+      &::-webkit-search-results-button,
+      &::-webkit-search-results-decoration {
+        display: none;
+      }
     }
+    .search_icon {
+      position: absolute;
+      top: 50%;
+      right: 14px;
+      transform: translateY(-50%);
+      color: var(--bg-reverse);
+    }
+  }
+  .acc-item {
+    background: var(--bg-surface);
+    padding: 10px;
+    border-radius: 10px;
+    color: var(--bg-reverse);
+    margin-bottom: 8px;
+    .title_and_description {
+      position: relative;
+      cursor: pointer;
+      .list_heading {
+        font-weight: 500;
+      }
+      .list_description {
+        width: 80%;
+        margin-top: 10px;
+      }
+    }
+    .arrow-up-down-box {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 10%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }
 
 .accordian_container {
-    margin: 10px 0px;
-    &:first-child {
-        margin-top: 0px;
-    }
+  margin: 10px 0px;
+  &:first-child {
+    margin-top: 0px;
+  }
 }
 
 pre,
 code {
-    white-space: pre;
-    overflow: auto;
-    &::-webkit-scrollbar {
-        width: 0px;
-    }
+  white-space: pre;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
 }
 
 .syntax-box {
-    margin: 10px 0px;
+  margin: 10px 0px;
 }
 
 .hljs {
-    padding: 0.5em;
+  padding: 0.5em;
 }
 
 .hidden_section {
-    width: 100%;
+  width: 100%;
 }
 
 .syntax_highlighted {
-    background: transparent !important;
+  background: transparent !important;
 }
 
 .example_highlighted {
-    background: var(--off-background) !important;
-    margin: 10px 0px;
+  background: var(--off-background) !important;
+  margin: 10px 0px;
 }
 
-.code-highlighter{
-    margin: 5px 0px;
+.code-highlighter {
+  margin: 5px 0px;
+  cursor: pointer;
+}
+
+// styles when bottom sheet is activated
+@media screen and (max-width: 720px) {
+  .searchbox__container {
+    height: calc(var(--rsbs-overlay-h) - 20px);
+    min-height: 10px;
+    &__results {
+      height: calc(100% - 50px);
+    }
+  }
 }

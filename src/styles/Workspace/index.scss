@@ -1,14 +1,34 @@
 .workspace_container {
   background: var(--bg-alt);
   height: 100vh;
-  width: 25vw;
+  width: 360px;
 }
-.split-container{
-  display: flex;
-  width: 100%;
-}
-
-.wrapper{
+.wrapper {
   width: 100%;
   height: 100vh;
+}
+
+.close-box {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-btn {
+  background: none;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-right: 10px;
+  color: var(--bg-reverse);
+}
+
+.bottom-sheet-container {
+  --rsbs-bg: var(--off-background);
+}
+
+@media screen and (max-width: 720px) {
+  .workspace_container {
+    display: none;
+  }
 }

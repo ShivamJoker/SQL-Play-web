@@ -8,7 +8,6 @@ import { AppContext } from '@contexts/AppContext';
 import sqlSyntaxes from '~types/sqlSyntaxes';
 import ControlBox from './ControlBox';
 import ResultsTable from './ResultsTable';
-import { IGlobalState } from '~types/global';
 
 function SQLEditor() {
   const monaco = useMonaco();
@@ -16,7 +15,6 @@ function SQLEditor() {
   const [monacoEditor, setMonacoEditor] = useState<monacoModule.editor.IStandaloneCodeEditor>();
   const [sqlResults, setSQLResults] = useState<QueryExecResult[]>();
   const { state: { editorText, appTheme }, dispatch } = useContext(AppContext);
-
   useEffect(() => {
     getSQLData().then((data) => setSQLData(data));
   }, []);
@@ -88,46 +86,44 @@ function SQLEditor() {
   };
 
   return (
-    <div>
-      {' '}
-      {/* empty div for react-split.js */}
-      <div className="sql_playground">
-        <div className="code_container">
-          <div className="code_container__textarea">
-            <Editor
-              height="200px"
-              language="sql"
-              theme={appTheme === "light" ? 'vs-default' : 'vs-dark'}
-              onMount={onMount}
-              options={{
-                minimap: { enabled: false },
-                overviewRulerLanes: 0,
-                hideCursorInOverviewRuler: true,
-                overviewRulerBorder: false,
-                scrollbar: {
-                  vertical: 'auto',
-                  horizontal: 'auto',
-                  verticalScrollbarSize: 0,
-                  horizontalScrollbarSize: 4,
-                },
-                lineNumbers: 'off',
-                glyphMargin: false,
-                folding: false,
-                lineDecorationsWidth: 0,
-                lineNumbersMinChars: 0,
-                autoIndent: 'full',
-                renderLineHighlight: 'none',
-                fontSize: 16,
-              }}
-              value={editorText}
-              onChange={editorOnChange}
-            />
-          </div>
-          <ControlBox editorText={editorText} onResult={setSQLResults} />
+    <div className="sql_playground">
+      <div className="code_container">
+        <div className="code_container__textarea">
+          <Editor
+            width={'40vw'}
+            height="200px"
+            language="sql"
+            theme={appTheme === "light" ? 'vs-default' : 'vs-dark'}
+            onMount={onMount}
+            options={{
+              minimap: { enabled: false },
+              overviewRulerLanes: 0,
+              hideCursorInOverviewRuler: true,
+              overviewRulerBorder: false,
+              scrollbar: {
+                vertical: 'auto',
+                horizontal: 'auto',
+                verticalScrollbarSize: 0,
+                horizontalScrollbarSize: 4,
+              },
+              lineNumbers: 'off',
+              glyphMargin: false,
+              folding: false,
+              lineDecorationsWidth: 0,
+              lineNumbersMinChars: 0,
+              autoIndent: 'full',
+              renderLineHighlight: 'none',
+              fontSize: 16,
+              automaticLayout: true,
+            }}
+            value={editorText}
+            onChange={editorOnChange}
+          />
         </div>
-        <div className="sql_result_container">
-          <ResultsTable table={sqlResults ? sqlResults[0] : undefined} />
-        </div>
+        <ControlBox editorText={editorText} onResult={setSQLResults} />
+      </div>
+      <div className="sql_result_container">
+        <ResultsTable table={sqlResults ? sqlResults[0] : undefined} />
       </div>
     </div>
   );

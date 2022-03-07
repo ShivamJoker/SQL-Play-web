@@ -1,5 +1,5 @@
 import { execCmd, saveDBState } from '@utils/db';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import { QueryExecResult } from 'sql.js';
 import { toast, ToastOptions } from 'react-toastify';
@@ -12,6 +12,14 @@ interface Props {
 function ControlBox({ editorText, onResult }: Props) {
   const {state: {theme}} = useContext(AppContext);
   const [toastTheme, setToastTheme] = useState<ToastOptions['theme']>('light');
+  const toastOptionsRef = useRef<ToastOptions>({
+    type: 'error',
+    theme: toastTheme,
+    hideProgressBar: false,
+    position: 'bottom-right',
+    pauseOnFocusLoss: false,
+    autoClose: 5000,
+  })
 
   useEffect(() => {
     if(theme === "system"){
@@ -33,23 +41,23 @@ function ControlBox({ editorText, onResult }: Props) {
   const onRun = () => {
     try {
       const results = execCmd(editorText);
+      console.log(results);
       if (results && results.length) {
         onResult(results);
       } else {
+        if(results && !results.length){
+          toast('Query executed.', {
+            ...toastOptionsRef.current,
+            type: 'success',
+          })
+        }
         onResult(undefined);
       }
       saveDBState();
     } catch (error: any) {
       const message = error.message.charAt(0).toUpperCase() + error.message.slice(1);
 
-      toast(message, {
-        type: 'error',
-        theme: toastTheme,
-        hideProgressBar: false,
-        position: 'bottom-right',
-        pauseOnFocusLoss: false,
-        autoClose: 5000,
-      });
+      toast(message, toastOptionsRef.current);
       onResult(undefined);
     }
   };

@@ -19,8 +19,9 @@
     &.btn-active {
       border-left: 4px solid var(--border-nav-icons);
     }
-    &:hover, &:focus-visible {
-      background: var(--primary-alt);
+    &:hover,
+    &:focus-visible {
+      background: #00000029;
     }
   }
 }

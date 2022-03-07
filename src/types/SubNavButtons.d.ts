@@ -3,6 +3,7 @@ import { IGlobalState } from './global';
 
 interface SubNavButton {
   title: IGlobalState['activeSidebarTab'],
-  icon: IconType
+  icon: IconType,
+  className?: string;
 }
 export default SubNavButton;

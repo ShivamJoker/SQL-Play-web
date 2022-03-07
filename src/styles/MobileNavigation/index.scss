@@ -1,0 +1,38 @@
+@media screen and (max-width: 720px) {
+  .mobile_nav {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 50px;
+    z-index: 2;
+    padding: 0px 10px;
+    justify-content: space-between;
+    background: var(--primary);
+    display: flex;
+    align-items: center;
+    &__nav_btns {
+      &.btn-active {
+        border: none;
+      }
+    }
+    .search-btn{
+      &:hover{
+        background: unset;
+      }
+    }
+  }
+  .search-btn-mobile {
+    background: none;
+    padding: 5px;
+    font-size: 22px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  .sql-play-title{
+    font-weight: bold;
+    margin-left: 10px;
+    color: #000;
+  }
+}

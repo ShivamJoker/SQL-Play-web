@@ -10,13 +10,14 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
 function Button({
   Icon,
   active,
+  className,
   ...props
 }: ButtonProps) {
   return (
     <button
       role={"button"}
       tabIndex={0}
-      className={`side_nav__nav_btns ${active ? 'btn-active' : ''}`}
+      className={`side_nav__nav_btns ${active ? 'btn-active' : ''} ${className ? className : ''}`}
       {...props}
     >
       <Icon size={30} color="#212121" />
