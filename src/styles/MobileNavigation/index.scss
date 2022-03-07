@@ -16,8 +16,8 @@
         border: none;
       }
     }
-    .search-btn{
-      &:hover{
+    .search-btn {
+      &:hover {
         background: unset;
       }
     }
@@ -30,8 +30,7 @@
     outline: none;
     cursor: pointer;
   }
-  .sql-play-title{
-    font-weight: bold;
+  .sql-play-title {
     margin-left: 10px;
     color: #000;
   }
