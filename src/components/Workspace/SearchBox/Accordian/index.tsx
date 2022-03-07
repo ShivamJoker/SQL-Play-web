@@ -80,22 +80,28 @@ const DetailComponent: React.FC<SubComponentProps> = ({
   );
 };
 const Accordion = ({ items }: AccordionProps) => {
-  const { dispatch, state: {appTheme, isMobileSearchOpen} } = useContext(AppContext);
+  const {
+    dispatch,
+    state: { appTheme, isMobileSearchOpen },
+  } = useContext(AppContext);
 
   return (
     <ReactAccordion
       items={items}
       theme={appTheme}
       updateEditorText={(text: string) => {
-        if(isMobileSearchOpen){
-          dispatch({type: 'update_mobile_search_state', mobileSearchOpen: false});
+        if (isMobileSearchOpen) {
+          dispatch({
+            type: "update_mobile_search_state",
+            mobileSearchOpen: false,
+          });
         }
         dispatch({
           type: "update_editor_text",
           text: text,
-        })
-      }
-      }
+        });
+        umami("Example or syntax click");
+      }}
       SummaryComponent={SummaryComponent}
       DetailComponent={DetailComponent}
     />
