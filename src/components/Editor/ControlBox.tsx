@@ -4,6 +4,7 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import { QueryExecResult } from "sql.js";
 import { toast, ToastOptions } from "react-toastify";
 import { AppContext } from "@contexts/AppContext";
+import { postEvent } from "@utils/analytics";
 interface Props {
   editorText: string;
   onResult: (results: QueryExecResult[] | undefined) => void;
@@ -39,7 +40,7 @@ function ControlBox({ editorText, onResult }: Props) {
   }, [theme]);
 
   const onRun = () => {
-    umami("Run button click");
+    postEvent("Run button click");
     try {
       const results = execCmd(editorText);
       if (results && results.length) {

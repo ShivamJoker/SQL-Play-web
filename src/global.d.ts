@@ -1,3 +1,3 @@
 type Umami = (event: string) => void;
 
-declare const umami: Umami;
+declare const umami: Umami | undefined;

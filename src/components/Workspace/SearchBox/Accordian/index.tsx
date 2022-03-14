@@ -1,4 +1,5 @@
 import { AppContext } from "@contexts/AppContext";
+import { postEvent } from "@utils/analytics";
 import randomString from "@utils/randomString";
 import { useContext } from "react";
 import ReactAccordion from "react-fast-accordion";
@@ -100,7 +101,7 @@ const Accordion = ({ items }: AccordionProps) => {
           type: "update_editor_text",
           text: text,
         });
-        umami("Example or syntax click");
+        postEvent("Example or syntax click");
       }}
       SummaryComponent={SummaryComponent}
       DetailComponent={DetailComponent}

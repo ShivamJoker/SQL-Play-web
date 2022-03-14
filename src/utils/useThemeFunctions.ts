@@ -1,5 +1,6 @@
 import { AppContext } from "@contexts/AppContext";
 import { useCallback, useContext } from "react";
+import { postEvent } from "./analytics";
 
 const useToggler = () => {
   const { dispatch } = useContext(AppContext);
@@ -13,11 +14,11 @@ const useToggler = () => {
   const toggleDarkTheme = (isDark: boolean) => {
     if (isDark) {
       dispatch({ type: "switch_app_theme", appTheme: "dark" });
-      umami("Theme event dark");
+      postEvent("Theme event dark");
       return;
     }
     dispatch({ type: "switch_app_theme", appTheme: "light" });
-    umami("Theme event light");
+    postEvent("Theme event light");
   };
 
   // useEffect callback when app's theme state updates.
