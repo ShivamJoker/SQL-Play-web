@@ -1,7 +1,15 @@
-import Editor, { OnChange, OnMount, useMonaco } from "@monaco-editor/react";
+import Editor, {
+  loader,
+  OnChange,
+  OnMount,
+  useMonaco,
+} from "@monaco-editor/react";
 import "@styles/Editor/index.scss";
 import { useContext, useEffect, useState } from "react";
-import * as monacoModule from "monaco-editor";
+import * as monaco from "monaco-editor";
+import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker";
+// import sqlWoker from "monaco-editor/esm/vs/basic-languages/sql/";
+
 import getSQLData from "@utils/getSQLData";
 import { QueryExecResult } from "sql.js";
 import { AppContext } from "@contexts/AppContext";
@@ -9,11 +17,21 @@ import sqlSyntaxes from "~types/sqlSyntaxes";
 import ControlBox from "./ControlBox";
 import ResultsTable from "./ResultsTable";
 
+//@ts-ignore
+self.MonacoEnvironment = {
+  getWorker() {
+    return new editorWorker();
+  },
+};
+
+//@ts-ignore
+loader.config({ monaco });
+
 function SQLEditor() {
   const monaco = useMonaco();
   const [sqlSyntaxes, setSQLData] = useState<sqlSyntaxes[] | undefined>();
   const [monacoEditor, setMonacoEditor] =
-    useState<monacoModule.editor.IStandaloneCodeEditor>();
+    useState<monaco.editor.IStandaloneCodeEditor>();
 
   const [sqlResults, setSQLResults] = useState<QueryExecResult[]>();
 
