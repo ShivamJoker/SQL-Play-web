@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import getSQLData from "@utils/getSQLData";
 import sqlSyntaxes from "~types/sqlSyntaxes";
 import Accordian from "./Accordian";
-import "highlight.js/styles/vs.css";
 
 const SearchBox: React.FC = () => {
   const [searchingTextList, setSearchingTextList] = useState<sqlSyntaxes[]>();
